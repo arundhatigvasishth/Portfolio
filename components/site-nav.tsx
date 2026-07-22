@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { nav, profile } from "@/lib/content"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { TextPlate } from "@/components/text-plate"
 
 export function SiteNav() {
   const [open, setOpen] = useState(false)
@@ -24,8 +25,10 @@ export function SiteNav() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
         <a href="#top" className="group flex items-center gap-2 font-serif text-lg font-semibold tracking-tight">
-          <span className="text-primary">Arundhati</span>
-          <span className="text-accent transition-transform group-hover:translate-x-0.5">Vasishth</span>
+          <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5 text-primary">Arundhati</TextPlate>
+          <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5 text-accent transition-transform group-hover:translate-x-0.5">
+            Vasishth
+          </TextPlate>
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
@@ -36,7 +39,7 @@ export function SiteNav() {
                   href={item.href}
                   className="relative text-foreground/70 transition-colors hover:text-foreground after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
                 >
-                  {item.label}
+                  <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{item.label}</TextPlate>
                 </a>
               </li>
             ))}
@@ -59,7 +62,7 @@ export function SiteNav() {
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
+        <div className="border-t border-border bg-background md:hidden">
           <ul className="mx-auto flex max-w-6xl flex-col px-5 py-2 sm:px-8">
             {nav.map((item) => (
               <li key={item.href}>
