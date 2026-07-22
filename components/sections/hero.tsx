@@ -1,0 +1,87 @@
+"use client"
+
+import dynamic from "next/dynamic"
+import { ArrowUpRight, FileText } from "lucide-react"
+import { profile } from "@/lib/content"
+import { IconGithub, IconLinkedin } from "@/components/icons"
+
+const RhythmScene = dynamic(
+  () => import("@/components/three/rhythm-scene").then((m) => m.RhythmScene),
+  { ssr: false },
+)
+
+export function Hero() {
+  return (
+    <section id="top" className="relative min-h-[100svh] w-full overflow-hidden">
+      {/* Interactive 3D taal ring, full-bleed behind the copy */}
+      <div className="pointer-events-none absolute inset-0 md:pointer-events-auto">
+        <div className="absolute inset-0 md:left-[38%]">
+          <RhythmScene />
+        </div>
+      </div>
+
+      {/* readability wash */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:via-background/40" />
+
+      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pt-24 sm:px-8">
+        <div className="max-w-2xl">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 font-mono text-xs tracking-[0.2em] text-muted-foreground backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            {profile.location.toUpperCase()}
+          </p>
+          <h1 className="text-balance font-serif text-5xl font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl md:text-7xl">
+            Arundhati
+            <br />
+            <span className="text-primary">Vasishth</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-foreground/80 sm:text-xl">
+            {profile.tagline}
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              View work
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+            <a
+              href={profile.resume}
+              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+            >
+              <FileText className="h-4 w-4" />
+              Resume
+            </a>
+            <div className="ml-1 flex items-center gap-1">
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="GitHub profile"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:text-accent"
+              >
+                <IconGithub className="h-5 w-5" />
+              </a>
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="LinkedIn profile"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:text-accent"
+              >
+                <IconLinkedin className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-8 left-5 hidden items-center gap-3 font-mono text-xs tracking-[0.25em] text-muted-foreground sm:left-8 md:flex">
+          <span>TEENTAL · 16 BEATS</span>
+          <span className="h-px w-16 bg-border" />
+          <span>MOVE YOUR CURSOR</span>
+        </div>
+      </div>
+    </section>
+  )
+}

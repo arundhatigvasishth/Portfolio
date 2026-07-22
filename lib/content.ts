@@ -1,0 +1,190 @@
+// ---------------------------------------------------------------------------
+// All site content lives here so it is easy to find and edit in one place.
+// No copy is duplicated inside components.
+// ---------------------------------------------------------------------------
+
+export const profile = {
+  name: "Arundhati Vasishth",
+  location: "Amherst, MA",
+  tagline: "CS @ UMass Amherst, building AI systems powered by rhythm.",
+  email: "avasishth@umass.edu",
+  github: "https://github.com/arundhatigvasishth",
+  linkedin: "https://www.linkedin.com/in/arundhatigv",
+  resume: "/resume.pdf",
+}
+
+export const about: string[] = [
+  "I'm a computer science student at UMass Amherst focused on applied AI: RAG pipelines, LLM systems, and machine learning that has to hold up in front of real stakes, from public health enforcement to medical imaging.",
+  "Outside of code, I train in Bharatanatyam and Kathak, two classical Indian dance forms, and dance Western styles for fun. Both worlds run on the same discipline: precise timing, deliberate repetition, and a lot of quiet practice before anything looks effortless.",
+  "The two aren't as separate as they sound. Bharatanatyam and Kathak are built on mudras, codified hand gestures that carry meaning. FingerSolve, one of the projects below, is a real-time hand-gesture recognition system. Different vocabulary, same underlying question: what can a hand's shape communicate, and how precisely can that be read.",
+]
+
+export type Experience = {
+  id: string
+  org: string
+  place: string
+  role: string
+  period: string
+  points: string[]
+  link?: { label: string; href: string }
+}
+
+export const experience: Experience[] = [
+  {
+    id: "eohhs",
+    org: "Massachusetts Executive Office of Health & Human Services (EOHHS)",
+    place: "Boston, MA",
+    role: "AI Software Engineer",
+    period: "Spring to Summer 2026",
+    points: [
+      "Built an AI-powered regulatory chatbot for Massachusetts DPH's statewide public health platform (Metrik), targeting 85%+ accuracy across 351 local health departments and 5 inspection domains.",
+      "Architected a RAG pipeline on AWS Bedrock with Amazon Kendra, grounding all responses in official Massachusetts CMR documents to eliminate hallucination risk for court-level enforcement decisions.",
+      "Conducted stakeholder interviews with DPH to define KPI benchmarks, reducing inspector document search time from 2 to 10 minutes per query to near-instantaneous AI responses.",
+      "Designed audit logging, inspector feedback, and flagging systems to continuously monitor response accuracy, completeness, and recall across all inspection domains statewide.",
+    ],
+  },
+  {
+    id: "iisc",
+    org: "Indian Institute of Science (IISc)",
+    place: "Bangalore, India",
+    role: "Machine Learning Research Intern",
+    period: "Summer 2025",
+    points: [
+      "Conducted a comparative study of 6 machine learning and deep learning pipelines (SVM, PCA-SVM, CNN, XGBoost, PCA-XGBoost, and CNN-XGBoost) for medical image classification using 8,700+ chest X-ray and brain MRI images across binary and multi-class tasks.",
+      "Implemented VGG16 transfer learning and hybrid CNN-XGBoost pipelines, achieving up to 96% test accuracy on brain MRI classification and 95% on chest X-ray classification.",
+      "Evaluated model robustness across multiple train-validation-test splits and collaborated with 11 researchers to publish findings identifying hybrid deep learning architectures as the most reliable approach for limited-data medical imaging.",
+    ],
+    link: {
+      label: "View repository",
+      href: "https://github.com/arundhatigvasishth/Comparitive-Ananlysis-of-Hybrid-ML-and-DL-Models-for-Medical-Image-Classification",
+    },
+  },
+]
+
+export type Project = {
+  id: string
+  name: string
+  tagline: string
+  meta: string
+  team: "Team project" | "Solo project"
+  teamNote?: string
+  callout?: string
+  points: string[]
+  tech: string[]
+  link?: { label: string; href: string }
+}
+
+export const projects: Project[] = [
+  {
+    id: "fingersolve",
+    name: "FingerSolve",
+    tagline: "AI-powered hand gesture recognition for touch-free math quizzes.",
+    meta: "Spring 2025 · Amherst, MA",
+    team: "Team project",
+    teamNote: "Team-built. Repository belongs to a teammate.",
+    callout:
+      "Mudras in Bharatanatyam and Kathak are codified hand gestures with fixed meaning. This project reads gesture shape in real time for the same reason.",
+    points: [
+      "Built a real-time gesture-recognition learning tool for touch-free math quizzes, improving engagement for children and users with disabilities by 40% during pilot testing.",
+      "Engineered a React/Flask platform using MediaPipe Hands and TensorFlow/Keras, achieving 94% gesture-classification accuracy across 12 gestures.",
+      "Designed a dynamic UI with confidence scoring, reducing user input errors by 30%. Earned 2nd place at the MassAI ML Conference.",
+    ],
+    tech: ["React", "Flask", "MediaPipe", "TensorFlow/Keras"],
+    link: { label: "View repository", href: "https://github.com/junaid-pathan/fingersolve" },
+  },
+  {
+    id: "medecho",
+    name: "MedEcho",
+    tagline: "AI-powered medical results translator with a talking avatar.",
+    meta: "Spring 2026 · Amherst, MA",
+    team: "Team project",
+    teamNote: "Team-built.",
+    points: [
+      "Built a 3-portal system where a DenseNet-121 CNN classifies chest X-ray findings and GradCAM highlights the region driving the prediction, turning raw scans into plain-language explanations.",
+      "Used Gemini to generate patient scripts and ElevenLabs + HeyGen's LiveAvatar to deliver diagnoses out loud, face-to-face, in 4 languages, before and after physician review.",
+      "Added a clinical-trial matching feature using the ClinicalTrials.gov API; built the full Flask/React prototype in 24 hours.",
+    ],
+    tech: ["React", "Flask", "DenseNet-121", "Gemini", "ElevenLabs"],
+    link: { label: "View repository", href: "https://github.com/Sanshiv123/MedEcho" },
+  },
+  {
+    id: "maif",
+    name: "MAIF (Quant Arm)",
+    tagline: "Multi-agent NLP pipeline for prediction-market arbitrage.",
+    meta: "Spring 2026 · Amherst, MA",
+    team: "Solo project",
+    points: [
+      "Built a multi-agent NLP pipeline semantically matching prediction-market contracts across 4 exchanges (Kalshi, Polymarket, Manifold, Metaculus) to find deterministic arbitrage pairs instead of directional bets.",
+      "Designed a pipeline that embeds market questions into a Qdrant vector DB, clusters via KNN, and uses an LLM (Groq/Llama) to classify semantic relationships across 5 relation types.",
+      "Built a live polling service that re-fetches quotes for confirmed pairs and alerts when profit edge exceeds a configurable threshold.",
+    ],
+    tech: ["Qdrant", "Groq/Llama", "Python"],
+  },
+  {
+    id: "ecoforecast",
+    name: "EcoForecast",
+    tagline: "Environmental forecasting project.",
+    meta: "2026 · Amherst, MA",
+    team: "Solo project",
+    points: [
+      "Built with TypeScript as part of ongoing coursework and independent exploration.",
+    ],
+    tech: ["TypeScript"],
+    link: { label: "View repository", href: "https://github.com/arundhatigvasishth/EcoForecast" },
+  },
+]
+
+export type SkillGroup = { label: string; items: string[] }
+
+export const skills: SkillGroup[] = [
+  {
+    label: "Languages",
+    items: ["Python", "Java", "TypeScript", "JavaScript", "HTML/CSS"],
+  },
+  {
+    label: "Frameworks & Cloud",
+    items: [
+      "React.js",
+      "Node.js",
+      "Express",
+      "Flask",
+      "TensorFlow/Keras",
+      "AWS (Bedrock, Kendra)",
+      "MongoDB",
+      "REST APIs",
+      "Git",
+    ],
+  },
+  {
+    label: "Data & AI",
+    items: [
+      "RAG pipelines",
+      "LLM integration",
+      "Statistical analysis",
+      "Data modeling",
+      "Visualization",
+      "Hypothesis testing",
+    ],
+  },
+]
+
+export const education = {
+  school: "University of Massachusetts, Amherst",
+  degree: "BS, Computer Science",
+  place: "Amherst, MA",
+  honors: ["GPA: 3.83", "Chancellor's Award", "Dean's List Honoree"],
+  expected: "Expected Fall 2028",
+}
+
+export const contact = {
+  heading: "Let's talk",
+  subtext: "Reach out about work, research, or a project idea.",
+}
+
+export const nav = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+]
