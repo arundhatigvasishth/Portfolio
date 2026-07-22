@@ -1,25 +1,10 @@
-"use client"
-
-import dynamic from "next/dynamic"
 import { ArrowUpRight, FileText } from "lucide-react"
 import { profile } from "@/lib/content"
 import { IconGithub, IconLinkedin } from "@/components/icons"
 
-const RhythmScene = dynamic(
-  () => import("@/components/three/rhythm-scene").then((m) => m.RhythmScene),
-  { ssr: false },
-)
-
 export function Hero() {
   return (
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden">
-      {/* Interactive 3D taal ring, full-bleed behind the copy */}
-      <div className="pointer-events-none absolute inset-0 md:pointer-events-auto">
-        <div className="absolute inset-0 md:left-[38%]">
-          <RhythmScene />
-        </div>
-      </div>
-
       {/* readability wash */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:via-background/40" />
 

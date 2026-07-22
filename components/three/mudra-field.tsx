@@ -105,6 +105,8 @@ export function MudraField() {
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true }}
       camera={{ position: [0, 0, 8], fov: 45 }}
+      eventSource={document.body}
+      eventPrefix="client"
     >
       <Rig />
       <Field reduced={reduced} />
