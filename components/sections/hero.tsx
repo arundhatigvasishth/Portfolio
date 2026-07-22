@@ -1,6 +1,7 @@
 import { ArrowUpRight, FileText } from "lucide-react"
 import { profile } from "@/lib/content"
 import { IconGithub, IconLinkedin } from "@/components/icons"
+import { TextPlate } from "@/components/text-plate"
 
 export function Hero() {
   return (
@@ -10,17 +11,17 @@ export function Hero() {
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-5 pt-24 sm:px-8">
         <div className="max-w-2xl">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 font-mono text-xs tracking-[0.2em] text-muted-foreground backdrop-blur-sm">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs tracking-[0.2em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             {profile.location.toUpperCase()}
           </p>
           <h1 className="text-balance font-serif text-5xl font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl md:text-7xl">
-            Arundhati
+            <TextPlate className="px-2 py-1 -mx-2 -my-1">Arundhati</TextPlate>
             <br />
-            <span className="text-primary">Vasishth</span>
+            <TextPlate className="px-2 py-1 -mx-2 -my-1 text-primary">Vasishth</TextPlate>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-foreground/80 sm:text-xl">
-            {profile.tagline}
+            <TextPlate>{profile.tagline}</TextPlate>
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -33,7 +34,7 @@ export function Hero() {
             </a>
             <a
               href={profile.resume}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
             >
               <FileText className="h-4 w-4" />
               Resume
@@ -62,9 +63,9 @@ export function Hero() {
         </div>
 
         <div className="absolute bottom-8 left-5 hidden items-center gap-3 font-mono text-xs tracking-[0.25em] text-muted-foreground sm:left-8 md:flex">
-          <span>TEENTAL · 16 BEATS</span>
+          <TextPlate className="px-0.5 py-0 -mx-0.5 -my-0">TEENTAL · 16 BEATS</TextPlate>
           <span className="h-px w-16 bg-border" />
-          <span>MOVE YOUR CURSOR</span>
+          <TextPlate className="px-0.5 py-0 -mx-0.5 -my-0">MOVE YOUR CURSOR</TextPlate>
         </div>
       </div>
     </section>
