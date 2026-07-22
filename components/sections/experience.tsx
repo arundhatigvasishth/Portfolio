@@ -15,7 +15,7 @@ export function Experience() {
             const Icon = badgeIcons[job.id as BadgeIconKey]
             return (
               <Reveal key={job.id} delay={i * 100}>
-                <article className="group rounded-2xl border border-border bg-background/60 p-6 transition-colors hover:border-accent/60 sm:p-8">
+                <article className="group rounded-2xl border border-border bg-background p-6 transition-colors hover:border-accent/60 sm:p-8">
                   <div className="flex flex-col gap-6 sm:flex-row sm:gap-8">
                     <div className="flex shrink-0 items-start">
                       <span className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card text-primary transition-colors group-hover:border-accent group-hover:text-accent">
