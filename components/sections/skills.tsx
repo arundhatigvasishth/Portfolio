@@ -2,6 +2,7 @@ import { GraduationCap } from "lucide-react"
 import { skills, education } from "@/lib/content"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
+import { TextPlate } from "@/components/text-plate"
 
 export function Skills() {
   return (
@@ -15,7 +16,7 @@ export function Skills() {
               <Reveal key={group.label} delay={i * 90}>
                 <div>
                   <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-accent">
-                    {group.label}
+                    <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{group.label}</TextPlate>
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {group.items.map((item) => (
@@ -33,7 +34,7 @@ export function Skills() {
           </div>
 
           <Reveal delay={120}>
-            <div className="rounded-2xl border border-border bg-background/60 p-6 sm:p-8">
+            <div className="rounded-2xl border border-border bg-background p-6 sm:p-8">
               <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card text-primary">
                 <GraduationCap className="h-6 w-6" />
               </span>
