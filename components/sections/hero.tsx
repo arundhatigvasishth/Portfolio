@@ -15,10 +15,9 @@ export function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             {profile.location.toUpperCase()}
           </p>
-          <h1 className="text-balance font-serif text-5xl font-semibold leading-[0.95] tracking-tight text-foreground sm:text-6xl md:text-7xl">
-            <TextPlate className="px-2 py-1 -mx-2 -my-1">Arundhati</TextPlate>
-            <br />
-            <TextPlate className="px-2 py-1 -mx-2 -my-1 text-primary">Vasishth</TextPlate>
+          <h1 className="text-balance font-serif text-5xl font-semibold tracking-tight text-foreground sm:text-6xl md:text-7xl">
+            <TextPlate className="block px-2 py-0.5 -mx-2 leading-tight">Arundhati</TextPlate>
+            <TextPlate className="block px-2 py-0.5 -mx-2 leading-tight text-primary">Vasishth</TextPlate>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-foreground/80 sm:text-xl">
             <TextPlate>{profile.tagline}</TextPlate>
