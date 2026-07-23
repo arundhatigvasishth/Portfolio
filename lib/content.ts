@@ -26,6 +26,7 @@ export type Experience = {
   role: string
   period: string
   points: string[]
+  pointGroups?: { period: string; points: string[] }[]
   link?: { label: string; href: string }
 }
 
@@ -41,6 +42,30 @@ export const experience: Experience[] = [
       "Architected a RAG pipeline on AWS Bedrock with Amazon Kendra, grounding all responses in official Massachusetts CMR documents to eliminate hallucination risk for court-level enforcement decisions.",
       "Conducted stakeholder interviews with DPH to define KPI benchmarks, reducing inspector document search time from 2 to 10 minutes per query to near-instantaneous AI responses.",
       "Designed audit logging, inspector feedback, and flagging systems to continuously monitor response accuracy, completeness, and recall across all inspection domains statewide.",
+    ],
+  },
+  {
+    id: "maif",
+    org: "MAIF (Quant Arm)",
+    place: "Amherst, MA",
+    role: "Junior Analyst",
+    period: "Fall 2025 to Present",
+    points: [],
+    pointGroups: [
+      {
+        period: "Fall 2025",
+        points: [
+          "Built and evaluated a volatility research pipeline, backtesting forecasting models and trading strategies with performance metrics (Sharpe ratio, drawdown, PnL) to assess risk-return trade-offs and robustness across market regimes.",
+          "Automated data workflows to improve reliability and efficiency, and worked with senior analysts to interpret results and refine execution logic that informed strategy decisions.",
+        ],
+      },
+      {
+        period: "Spring 2026",
+        points: [
+          "Built a multi-agent NLP pipeline semantically matching prediction-market contracts across 4 exchanges (Kalshi, Polymarket, Manifold, Metaculus) to identify deterministic arbitrage pairs instead of directional bets.",
+          "Designed a pipeline embedding market questions into a Qdrant vector DB, clustering via KNN, and using an LLM (Groq/Llama) to classify semantic relationships, then built a live polling service that alerts when profit edge exceeds a configurable threshold.",
+        ],
+      },
     ],
   },
   {
@@ -106,19 +131,6 @@ export const projects: Project[] = [
     ],
     tech: ["React", "Flask", "DenseNet-121", "Gemini", "ElevenLabs"],
     link: { label: "View repository", href: "https://github.com/Sanshiv123/MedEcho" },
-  },
-  {
-    id: "maif",
-    name: "MAIF (Quant Arm)",
-    tagline: "Multi-agent NLP pipeline for prediction-market arbitrage.",
-    meta: "Spring 2026 · Amherst, MA",
-    team: "Solo project",
-    points: [
-      "Built a multi-agent NLP pipeline semantically matching prediction-market contracts across 4 exchanges (Kalshi, Polymarket, Manifold, Metaculus) to find deterministic arbitrage pairs instead of directional bets.",
-      "Designed a pipeline that embeds market questions into a Qdrant vector DB, clusters via KNN, and uses an LLM (Groq/Llama) to classify semantic relationships across 5 relation types.",
-      "Built a live polling service that re-fetches quotes for confirmed pairs and alerts when profit edge exceeds a configurable threshold.",
-    ],
-    tech: ["Qdrant", "Groq/Llama", "Python"],
   },
   {
     id: "ecoforecast",

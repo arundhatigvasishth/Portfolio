@@ -39,14 +39,34 @@ export function Experience() {
                         </span>
                       </div>
 
-                      <ul className="mt-5 flex flex-col gap-3">
-                        {job.points.map((point, p) => (
-                          <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                            <span className="text-pretty">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {job.pointGroups ? (
+                        <div className="mt-5 flex flex-col gap-4">
+                          {job.pointGroups.map((group, g) => (
+                            <div key={g} className="flex flex-col gap-3">
+                              <span className="inline-flex w-fit shrink-0 rounded-full border border-border px-2.5 py-0.5 font-mono text-[11px] tracking-wide text-muted-foreground">
+                                {group.period}
+                              </span>
+                              <ul className="flex flex-col gap-3">
+                                {group.points.map((point, p) => (
+                                  <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
+                                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                                    <span className="text-pretty">{point}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <ul className="mt-5 flex flex-col gap-3">
+                          {job.points.map((point, p) => (
+                            <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                              <span className="text-pretty">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
 
                       {job.link ? (
                         <a
