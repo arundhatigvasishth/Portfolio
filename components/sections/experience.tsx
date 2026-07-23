@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { experience } from "@/lib/content"
 import { badgeIcons, type BadgeIconKey } from "@/components/icons"
@@ -17,7 +18,7 @@ export function Experience() {
               <Reveal key={job.id} delay={i * 100}>
                 <article className="group rounded-2xl border border-border bg-background p-6 transition-colors hover:border-accent/60 sm:p-8">
                   <div className="flex flex-col gap-6 sm:flex-row sm:gap-8">
-                    <div className="flex shrink-0 items-start">
+                    <div className="flex shrink-0 items-start sm:self-start">
                       <span className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card text-primary transition-colors group-hover:border-accent group-hover:text-accent">
                         {Icon ? <Icon className="h-7 w-7" /> : null}
                       </span>
@@ -34,9 +35,11 @@ export function Experience() {
                           </p>
                           <p className="text-sm text-muted-foreground">{job.place}</p>
                         </div>
-                        <span className="shrink-0 rounded-full border border-border px-3 py-1 font-mono text-xs tracking-wide text-muted-foreground">
-                          {job.period}
-                        </span>
+                        {job.feature ? null : (
+                          <span className="shrink-0 rounded-full border border-border px-3 py-1 font-mono text-xs tracking-wide text-muted-foreground">
+                            {job.period}
+                          </span>
+                        )}
                       </div>
 
                       {job.pointGroups ? (
@@ -80,6 +83,40 @@ export function Experience() {
                         </a>
                       ) : null}
                     </div>
+
+                    {job.feature ? (
+                      <div className="flex shrink-0 flex-col items-end sm:w-56 sm:self-stretch md:w-64">
+                        <span className="shrink-0 rounded-full border border-border px-3 py-1 font-mono text-xs tracking-wide text-muted-foreground">
+                          {job.period}
+                        </span>
+                        <div className="flex w-full flex-1 items-center">
+                          <a
+                            href={job.feature.href}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="group/feature w-full"
+                          >
+                            <div
+                              className={`relative w-full overflow-hidden rounded-xl border border-border ${
+                                job.feature.aspect === "3/4" ? "aspect-[3/4]" : "aspect-[3/2]"
+                              }`}
+                            >
+                              <Image
+                                src={job.feature.image}
+                                alt={job.feature.alt}
+                                fill
+                                sizes="(min-width: 768px) 16rem, (min-width: 640px) 14rem, 100vw"
+                                className="object-cover transition-transform duration-300 group-hover/feature:scale-105"
+                              />
+                            </div>
+                            <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover/feature:text-accent">
+                              {job.feature.caption}
+                              <ArrowUpRight className="h-3.5 w-3.5" />
+                            </p>
+                          </a>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                 </article>
               </Reveal>

@@ -28,6 +28,7 @@ export type Experience = {
   points: string[]
   pointGroups?: { period: string; points: string[] }[]
   link?: { label: string; href: string }
+  feature?: { image: string; alt: string; caption: string; href: string; aspect?: "3/2" | "3/4" }
 }
 
 export const experience: Experience[] = [
@@ -43,6 +44,12 @@ export const experience: Experience[] = [
       "Conducted stakeholder interviews with DPH to define KPI benchmarks, reducing inspector document search time from 2 to 10 minutes per query to near-instantaneous AI responses.",
       "Designed audit logging, inspector feedback, and flagging systems to continuously monitor response accuracy, completeness, and recall across all inspection domains statewide.",
     ],
+    feature: {
+      image: "/experience/aws-ai-training.jpg",
+      alt: "AI for the Commonwealth interns and AWS trainers outside the UMass Amherst Computer Science Laboratories building",
+      caption: "AWS AI training for Commonwealth Interns",
+      href: "https://www.linkedin.com/posts/umass-amherst-public-interest-technology-initiative_thank-you-to-amazon-web-services-aws-for-activity-7473459493683585025-9U7o",
+    },
   },
   {
     id: "uca",
@@ -81,6 +88,18 @@ export const experience: Experience[] = [
     ],
   },
   {
+    id: "hackumass",
+    org: "HackUMass",
+    place: "Amherst, MA",
+    role: "Organizer, Technical & Public Relations Team",
+    period: "Fall 2025 to Present",
+    points: [
+      "Engineering and expanding the PERN (PostgreSQL, Express.js, React.js, and Node.js) platform that powers HackUMass, developing participant portals, organizer dashboards, and internal tools that support end-to-end event operations.",
+      "Designing and implementing full-stack features while collaborating with cross-functional organizer teams to deliver scalable, reliable, and user-focused experiences across the HackUMass platform.",
+      "Coordinating technical development alongside public relations initiatives to support the planning, execution, and community engagement efforts for one of UMass Amherst's flagship hackathons.",
+    ],
+  },
+  {
     id: "iisc",
     org: "Indian Institute of Science (IISc)",
     place: "Bangalore, India",
@@ -94,6 +113,13 @@ export const experience: Experience[] = [
     link: {
       label: "View repository",
       href: "https://github.com/arundhatigvasishth/Comparitive-Ananlysis-of-Hybrid-ML-and-DL-Models-for-Medical-Image-Classification",
+    },
+    feature: {
+      image: "/experience/iisc-summer-internship.jpg",
+      alt: "Arundhati Vasishth standing in front of the main building at the Indian Institute of Science, Bangalore",
+      caption: "Medical AI research internship at IISc",
+      href: "https://www.linkedin.com/posts/arundhatigv_iisc-medicalai-summerinternship-ugcPost-7352349538302545920-oAGJ/",
+      aspect: "3/4",
     },
   },
 ]
@@ -161,7 +187,7 @@ export type SkillGroup = { label: string; items: string[] }
 export const skills: SkillGroup[] = [
   {
     label: "Languages",
-    items: ["Python", "Java", "TypeScript", "JavaScript", "HTML/CSS"],
+    items: ["Python", "Java", "C", "TypeScript", "JavaScript", "HTML/CSS"],
   },
   {
     label: "Frameworks & Cloud",
@@ -172,8 +198,10 @@ export const skills: SkillGroup[] = [
       "Flask",
       "TensorFlow/Keras",
       "AWS (Bedrock, Kendra)",
+      "PostgreSQL",
       "MongoDB",
       "REST APIs",
+      "GCC/Make",
       "Git",
     ],
   },

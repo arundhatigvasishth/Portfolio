@@ -85,6 +85,16 @@ export function IconTerminal(props: IconProps) {
   )
 }
 
+// HackUMass: a lightning bolt inside a hex badge, for hackathon organizing.
+export function IconHackathon(props: IconProps) {
+  return (
+    <svg aria-hidden="true" {...base} {...props}>
+      <path d="M12 3l7 2.5v5c0 4.2-2.9 7.4-7 8.5-4.1-1.1-7-4.3-7-8.5v-5L12 3z" />
+      <path d="M13 8l-4 5h3l-1 4 5-5.5h-3l1-3.5z" />
+    </svg>
+  )
+}
+
 // Brand marks (not shipped in this lucide version).
 export function IconGithub(props: IconProps) {
   return (
@@ -110,6 +120,7 @@ export const badgeIcons = {
   maif: IconArbitrage,
   ecoforecast: IconEco,
   uca: IconTerminal,
+  hackumass: IconHackathon,
 } as const
 
 export type BadgeIconKey = keyof typeof badgeIcons
