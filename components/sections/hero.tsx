@@ -60,12 +60,6 @@ export function Hero() {
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-8 left-5 hidden items-center gap-3 font-mono text-xs tracking-[0.25em] text-muted-foreground sm:left-8 md:flex">
-          <TextPlate className="px-0.5 py-0 -mx-0.5 -my-0">TEENTAL · 16 BEATS</TextPlate>
-          <span className="h-px w-16 bg-border" />
-          <TextPlate className="px-0.5 py-0 -mx-0.5 -my-0">MOVE YOUR CURSOR</TextPlate>
-        </div>
       </div>
     </section>
   )

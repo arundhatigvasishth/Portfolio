@@ -26,7 +26,7 @@ function Field({ reduced }: { reduced: boolean }) {
   const colors = useMemo(() => {
     const dark = resolvedTheme === "dark"
     return {
-      rest: new THREE.Color(dark ? "#4a2a33" : "#c2a488"),
+      rest: new THREE.Color(dark ? "#4a2a33" : "#f0e6dd"),
       active: new THREE.Color(dark ? "#e6b352" : "#b9822a"),
     }
   }, [resolvedTheme])
@@ -58,11 +58,11 @@ function Field({ reduced }: { reduced: boolean }) {
       const dy = p.y - target.current.y
       const dist = Math.sqrt(dx * dx + dy * dy)
       const near = Math.max(0, 1 - dist / 2.2)
-      // gentle rhythmic shimmer so the field is never fully still
-      const beat = reduced ? 0 : pulse(((t / BEAT_SECONDS) + (p.x + p.y) * 0.08) % 1) * 0.12
       const lift = near * near
+      // rhythmic shimmer only kicks in near the cursor, so the resting field stays inert
+      const beat = reduced ? 0 : pulse(((t / BEAT_SECONDS) + (p.x + p.y) * 0.08) % 1) * 0.12 * near
       dummy.position.set(p.x, p.y, lift * 1.4 + beat)
-      const s = 0.05 + lift * 0.14 + beat * 0.2
+      const s = 0.002 + lift * 0.18 + beat * 0.2
       dummy.scale.setScalar(s)
       dummy.updateMatrix()
       m.setMatrixAt(i, dummy.matrix)

@@ -45,6 +45,18 @@ export const experience: Experience[] = [
     ],
   },
   {
+    id: "uca",
+    org: "Manning College of Information and Computer Sciences, UMass Amherst",
+    place: "Amherst, MA",
+    role: "Undergraduate Course Assistant, COMPSCI 198C",
+    period: "Spring 2026",
+    points: [
+      "Supported a hands-on practicum focused on systems-level programming in C, assisting students with core concepts including data types, functions, macros, formatted I/O, and pointer manipulation using linked lists.",
+      "Guided students through development workflows using tools such as gcc and make.",
+      "Reinforced programming fundamentals and debugging skills through labs, office hours, and one-on-one guidance.",
+    ],
+  },
+  {
     id: "maif",
     org: "MAIF (Quant Arm)",
     place: "Amherst, MA",
@@ -91,7 +103,6 @@ export type Project = {
   name: string
   tagline: string
   meta: string
-  team: "Team project" | "Solo project"
   teamNote?: string
   callout?: string
   points: string[]
@@ -105,7 +116,6 @@ export const projects: Project[] = [
     name: "FingerSolve",
     tagline: "AI-powered hand gesture recognition for touch-free math quizzes.",
     meta: "Spring 2025 · Amherst, MA",
-    team: "Team project",
     teamNote: "Team-built. Repository belongs to a teammate.",
     callout:
       "Mudras in Bharatanatyam and Kathak are codified hand gestures with fixed meaning. This project reads gesture shape in real time for the same reason.",
@@ -122,7 +132,6 @@ export const projects: Project[] = [
     name: "MedEcho",
     tagline: "AI-powered medical results translator with a talking avatar.",
     meta: "Spring 2026 · Amherst, MA",
-    team: "Team project",
     teamNote: "Team-built.",
     points: [
       "Built a 3-portal system where a DenseNet-121 CNN classifies chest X-ray findings and GradCAM highlights the region driving the prediction, turning raw scans into plain-language explanations.",
@@ -135,13 +144,14 @@ export const projects: Project[] = [
   {
     id: "ecoforecast",
     name: "EcoForecast",
-    tagline: "Environmental forecasting project.",
-    meta: "2026 · Amherst, MA",
-    team: "Solo project",
+    tagline: "Full-stack sustainability analytics platform for small businesses.",
+    meta: "Spring 2026 · Amherst, MA",
     points: [
-      "Built with TypeScript as part of ongoing coursework and independent exploration.",
+      "Built a full-stack sustainability platform simulating 20-year financial ROI and carbon impact of green investments for small businesses using custom TypeScript/Node.js financial models.",
+      "Developed backend APIs and MongoDB workflows to process quarterly utility data (electricity, water, fuel) and generate cost projections, break-even analysis, and carbon reduction estimates.",
+      "Integrated a React analytics dashboard with 4+ visualizations and a LLaMA 3.3-powered AI advisor to provide context-aware sustainability insights.",
     ],
-    tech: ["TypeScript"],
+    tech: ["TypeScript", "Node.js", "MongoDB", "React", "LLaMA 3.3"],
     link: { label: "View repository", href: "https://github.com/arundhatigvasishth/EcoForecast" },
   },
 ]

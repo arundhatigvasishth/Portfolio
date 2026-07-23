@@ -21,20 +21,9 @@ export function Projects() {
             <Reveal key={project.id} delay={(i % 2) * 90}>
               <TiltCard className="h-full">
                 <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/60 sm:p-7">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-primary">
-                      {Icon ? <Icon className="h-6 w-6" /> : null}
-                    </span>
-                    <span
-                      className={`rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.15em] ${
-                        project.team === "Solo project"
-                          ? "border border-accent/40 text-accent"
-                          : "border border-border text-muted-foreground"
-                      }`}
-                    >
-                      {project.team}
-                    </span>
-                  </div>
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-primary">
+                    {Icon ? <Icon className="h-6 w-6" /> : null}
+                  </span>
 
                   <h3 className="mt-5 font-serif text-2xl font-semibold text-foreground">{project.name}</h3>
                   <p className="mt-1.5 text-pretty text-sm font-medium text-foreground/80">{project.tagline}</p>

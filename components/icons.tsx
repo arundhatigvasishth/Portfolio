@@ -74,6 +74,17 @@ export function IconEco(props: IconProps) {
   )
 }
 
+// UCA: a terminal prompt, for teaching systems programming in C.
+export function IconTerminal(props: IconProps) {
+  return (
+    <svg aria-hidden="true" {...base} {...props}>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M7 9l3 3-3 3" />
+      <path d="M13 15h4" />
+    </svg>
+  )
+}
+
 // Brand marks (not shipped in this lucide version).
 export function IconGithub(props: IconProps) {
   return (
@@ -98,6 +109,7 @@ export const badgeIcons = {
   medecho: IconEcho,
   maif: IconArbitrage,
   ecoforecast: IconEco,
+  uca: IconTerminal,
 } as const
 
 export type BadgeIconKey = keyof typeof badgeIcons
