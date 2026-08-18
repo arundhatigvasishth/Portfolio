@@ -4,6 +4,9 @@ import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
 import { TextPlate } from "@/components/text-plate"
 
+// Fixed categorical order, one hue per group — matches lib/content.ts order.
+const categoryColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"]
+
 export function Skills() {
   return (
     <section id="skills" className="relative border-t border-border bg-card/30">
@@ -11,26 +14,51 @@ export function Skills() {
         <SectionHeading index="04" title="Skills & Education" />
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-          <div className="flex flex-col gap-8">
-            {skills.map((group, i) => (
-              <Reveal key={group.label} delay={i * 90}>
-                <div>
-                  <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-accent">
-                    <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{group.label}</TextPlate>
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    {group.items.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm text-foreground/85 transition-colors hover:border-accent hover:text-accent"
-                      >
-                        {item}
+          <div className="flex flex-col gap-9">
+            {skills.map((group, i) => {
+              const color = categoryColors[i % categoryColors.length]
+              return (
+                <Reveal key={group.label} delay={i * 90}>
+                  <div>
+                    <div className="mb-3 flex items-baseline justify-between gap-4">
+                      <h3 className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color }}>
+                        <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{group.label}</TextPlate>
+                      </h3>
+                      <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
+                        {group.items.length}
                       </span>
-                    ))}
+                    </div>
+
+                    {/* A rhythmic bar per skill — the count read as a beat, not a
+                        separate chart competing with the list below it. */}
+                    <div className="mb-4 flex h-4 items-end gap-[3px]" aria-hidden="true">
+                      {group.items.map((_, b) => (
+                        <span
+                          key={b}
+                          className="w-[3px] rounded-full"
+                          style={{
+                            backgroundColor: color,
+                            height: `${45 + ((b * 37) % 55)}%`,
+                            opacity: 0.4 + ((b * 17) % 60) / 100,
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2.5">
+                      {group.items.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm text-foreground/85 transition-colors hover:border-accent hover:text-accent"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              )
+            })}
           </div>
 
           <Reveal delay={120}>

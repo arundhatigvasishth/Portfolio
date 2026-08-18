@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { SiteBackground } from '@/components/site-background'
+import { Toaster } from '@/components/ui/sonner'
+import { SiteCommand } from '@/components/site-command'
 import './globals.css'
 
 const inter = Inter({
@@ -69,6 +71,8 @@ export default function RootLayout({
         >
           <SiteBackground />
           <div className="relative z-10">{children}</div>
+          <Toaster position="bottom-center" />
+          <SiteCommand />
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

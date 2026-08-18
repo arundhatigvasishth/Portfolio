@@ -70,9 +70,12 @@
   --border: oklch(0.87 0.02 68);
   --input: oklch(0.87 0.02 68);
   --ring: oklch(0.73 0.13 74);
-  --chart-1: oklch(0.375 0.12 22);
-  --chart-2: oklch(0.73 0.13 74);
-  --chart-3: oklch(0.52 0.1 30);
+  /* Chart marks are a separate, validated triple (contrast/CVD-checked
+     against the light surface) — deliberately distinct from --primary/--accent,
+     which are tuned for text and controls, not fills. */
+  --chart-1: oklch(0.5 0.16 20);
+  --chart-2: oklch(0.69 0.14 78);
+  --chart-3: oklch(0.58 0.17 195);
   --chart-4: oklch(0.62 0.12 55);
   --chart-5: oklch(0.44 0.09 18);
   --radius: 0.625rem;
@@ -107,9 +110,9 @@
   --border: oklch(0.85 0.05 70 / 14%);
   --input: oklch(0.85 0.05 70 / 18%);
   --ring: oklch(0.79 0.13 80);
-  --chart-1: oklch(0.79 0.13 80);
-  --chart-2: oklch(0.62 0.15 22);
-  --chart-3: oklch(0.68 0.12 45);
+  --chart-1: oklch(0.62 0.16 20);
+  --chart-2: oklch(0.66 0.14 78);
+  --chart-3: oklch(0.62 0.18 195);
   --chart-4: oklch(0.55 0.13 18);
   --chart-5: oklch(0.84 0.1 90);
   --sidebar: oklch(0.205 0.032 350);

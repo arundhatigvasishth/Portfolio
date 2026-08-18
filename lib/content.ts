@@ -29,6 +29,7 @@ export type Experience = {
   pointGroups?: { period: string; points: string[] }[]
   link?: { label: string; href: string }
   feature?: { image: string; alt: string; caption: string; href: string; aspect?: "3/2" | "3/4" }
+  logo?: { src: string; alt: string }
 }
 
 export const experience: Experience[] = [
@@ -50,6 +51,7 @@ export const experience: Experience[] = [
       caption: "AWS AI training for Commonwealth Interns",
       href: "https://www.linkedin.com/posts/umass-amherst-public-interest-technology-initiative_thank-you-to-amazon-web-services-aws-for-activity-7473459493683585025-9U7o",
     },
+    logo: { src: "/logos/eohhs.jpg", alt: "Massachusetts Executive Office of Health & Human Services seal" },
   },
   {
     id: "uca",
@@ -62,6 +64,7 @@ export const experience: Experience[] = [
       "Guided students through development workflows using tools such as gcc and make.",
       "Reinforced programming fundamentals and debugging skills through labs, office hours, and one-on-one guidance.",
     ],
+    logo: { src: "/logos/umass-m.png", alt: "UMass Amherst Collegiate M" },
   },
   {
     id: "maif",
@@ -86,6 +89,7 @@ export const experience: Experience[] = [
         ],
       },
     ],
+    logo: { src: "/logos/maif.jpg", alt: "Minutemen Alternative Investment Fund logo" },
   },
   {
     id: "hackumass",
@@ -98,6 +102,7 @@ export const experience: Experience[] = [
       "Designing and implementing full-stack features while collaborating with cross-functional organizer teams to deliver scalable, reliable, and user-focused experiences across the HackUMass platform.",
       "Coordinating technical development alongside public relations initiatives to support the planning, execution, and community engagement efforts for one of UMass Amherst's flagship hackathons.",
     ],
+    logo: { src: "/logos/hackumass.jpg", alt: "HackUMass logo" },
   },
   {
     id: "iisc",
@@ -121,6 +126,7 @@ export const experience: Experience[] = [
       href: "https://www.linkedin.com/posts/arundhatigv_iisc-medicalai-summerinternship-ugcPost-7352349538302545920-oAGJ/",
       aspect: "3/4",
     },
+    logo: { src: "/logos/iisc.svg", alt: "Indian Institute of Science crest" },
   },
 ]
 

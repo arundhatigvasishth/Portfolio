@@ -4,6 +4,7 @@ import { IconGithub, IconLinkedin } from "@/components/icons"
 import { BeatStrip } from "@/components/beat-strip"
 import { Reveal } from "@/components/reveal"
 import { TextPlate } from "@/components/text-plate"
+import { CopyEmailButton } from "@/components/copy-email-button"
 
 export function Contact() {
   const year = new Date().getFullYear()
@@ -48,9 +49,7 @@ export function Contact() {
             </a>
           </div>
 
-          <p className="mt-6 font-mono text-sm text-muted-foreground">
-            <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{profile.email}</TextPlate>
-          </p>
+          <CopyEmailButton email={profile.email} className="mt-6" />
         </Reveal>
       </div>
 
