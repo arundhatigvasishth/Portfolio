@@ -74,6 +74,16 @@ export function IconEco(props: IconProps) {
   )
 }
 
+// KnowYork: a location pin, for GPS-verified visits.
+export function IconPin(props: IconProps) {
+  return (
+    <svg aria-hidden="true" {...base} {...props}>
+      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" />
+      <path d="M9.5 10l1.8 1.8 3.2-3.6" />
+    </svg>
+  )
+}
+
 // UCA: a terminal prompt, for teaching systems programming in C.
 export function IconTerminal(props: IconProps) {
   return (
@@ -115,6 +125,7 @@ export function IconLinkedin(props: IconProps) {
 export const badgeIcons = {
   eohhs: IconRegulatory,
   iisc: IconImaging,
+  knowyork: IconPin,
   fingersolve: IconGesture,
   medecho: IconEcho,
   maif: IconArbitrage,
