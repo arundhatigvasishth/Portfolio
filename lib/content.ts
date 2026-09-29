@@ -144,6 +144,20 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "whyrouted",
+    name: "whyrouted",
+    tagline: "Inference-aware load balancer for LLM serving fleets.",
+    meta: "Ongoing",
+    teamNote: "Team-built with a teammate.",
+    points: [
+      "Building a TypeScript load balancer that routes LLM inference traffic across distributed model replicas, with 3 scheduling algorithms (round-robin, least-loaded, latency-weighted) and 500ms health monitoring to pick healthy, lightly loaded instances.",
+      "Engineering fault-tolerant request handling with automatic replica ejection and 3-attempt failover, achieving <1s failure detection and zero request loss during single-replica failures, validated across 177 automated tests.",
+      "Recording a decision log for every request, with the full candidate set, score inputs, and exclusion reasons, as the foundation for an MCP interface that will let any client ask why a request was routed the way it was.",
+    ],
+    tech: ["TypeScript", "Node.js", "Express", "MCP"],
+    link: { label: "View repository", href: "https://github.com/arundhatigvasishth/whyrouted" },
+  },
+  {
     id: "knowyork",
     name: "KnowYork",
     tagline: "Autonomous AI agent and blockchain platform that rewards verified NYC visits.",

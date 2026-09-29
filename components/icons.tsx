@@ -74,6 +74,19 @@ export function IconEco(props: IconProps) {
   )
 }
 
+// whyrouted: one input fanning out to several replicas.
+export function IconRoute(props: IconProps) {
+  return (
+    <svg aria-hidden="true" {...base} {...props}>
+      <circle cx="5" cy="12" r="2" />
+      <path d="M7 12h3c2 0 2-6 5-6h3M10 12h8M10 12c2 0 2 6 5 6h3" />
+      <circle cx="19" cy="6" r="1.5" />
+      <circle cx="19" cy="12" r="1.5" />
+      <circle cx="19" cy="18" r="1.5" />
+    </svg>
+  )
+}
+
 // KnowYork: a location pin, for GPS-verified visits.
 export function IconPin(props: IconProps) {
   return (
@@ -125,6 +138,7 @@ export function IconLinkedin(props: IconProps) {
 export const badgeIcons = {
   eohhs: IconRegulatory,
   iisc: IconImaging,
+  whyrouted: IconRoute,
   knowyork: IconPin,
   fingersolve: IconGesture,
   medecho: IconEcho,
