@@ -148,12 +148,14 @@ export const projects: Project[] = [
     name: "KnowYork",
     tagline: "Autonomous AI agent and blockchain platform that rewards verified NYC visits.",
     meta: "Fall 2026",
+    teamNote: "Team-built. Repository belongs to a teammate.",
     points: [
       "Built a full-stack AI agent that verifies real-world NYC visits and autonomously executes RLUSD rewards across XRPL and Solana, combining Grok vision with multi-sample GPS verification to reach 90%+ validation accuracy with <4s median decision latency.",
       "Engineered a zero-trust transaction pipeline with dual-agent verification, deterministic payout controls, and isolated wallet keys, rejecting 95%+ of simulated fraudulent submissions across 25 adversarial security tests.",
       "Enforced a 10 RLUSD on-chain maximum exposure so a compromised or fooled agent can never spend beyond a fixed cap.",
     ],
     tech: ["Grok", "XRPL", "Solana/Metaplex", "RLUSD", "GPS verification"],
+    link: { label: "View repository", href: "https://github.com/Rudra1729/KnowYork" },
   },
   {
     id: "fingersolve",
