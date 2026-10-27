@@ -1,8 +1,10 @@
 import { SiteNav } from "@/components/site-nav"
 import { Hero } from "@/components/sections/hero"
 import { About } from "@/components/sections/about"
-import { Experience } from "@/components/sections/experience"
 import { Projects } from "@/components/sections/projects"
+import { Research } from "@/components/sections/research"
+import { Experience } from "@/components/sections/experience"
+import { Leadership } from "@/components/sections/leadership"
 import { Skills } from "@/components/sections/skills"
 import { Contact } from "@/components/sections/contact"
 
@@ -13,8 +15,10 @@ export default function Page() {
       <main>
         <Hero />
         <About />
-        <Experience />
         <Projects />
+        <Research />
+        <Experience />
+        <Leadership />
         <Skills />
         <Contact />
       </main>

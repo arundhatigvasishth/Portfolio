@@ -29,11 +29,11 @@ export function SiteNav() {
       }`}
     >
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-8">
-        <a href="#top" className="text-[15px] font-semibold tracking-tight text-foreground">
+        <a href="/#top" className="text-[15px] font-semibold tracking-tight text-foreground">
           Arundhati Vasishth
         </a>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           <ul className="flex items-center gap-1 text-[13px]">
             {nav.map((item) => (
               <li key={item.href}>
@@ -51,6 +51,8 @@ export function SiteNav() {
             <ThemeToggle />
             <a
               href={profile.resume}
+              target="_blank"
+              rel="noreferrer noopener"
               className="ml-2 rounded-full bg-primary px-3.5 py-1.5 text-[13px] font-medium text-primary-foreground transition-opacity duration-200 ease-apple hover:opacity-90"
             >
               Resume
@@ -58,7 +60,7 @@ export function SiteNav() {
           </div>
         </div>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <CommandPaletteTrigger className={iconButton} />
           <ThemeToggle />
           <button
@@ -74,7 +76,7 @@ export function SiteNav() {
       </nav>
 
       {open && (
-        <div className="border-t border-border md:hidden">
+        <div className="border-t border-border lg:hidden">
           <ul className="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-8">
             {nav.map((item) => (
               <li key={item.href}>

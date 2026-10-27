@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { SiteBackground } from '@/components/site-background'
 import { Toaster } from '@/components/ui/sonner'
 import { SiteCommand } from '@/components/site-command'
+import { site } from '@/lib/content'
 import './globals.css'
 
 const inter = Inter({
@@ -14,10 +15,37 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Arundhati Vasishth — CS @ UMass Amherst',
-  description:
-    'Computer science student at UMass Amherst building applied AI systems: RAG pipelines, LLM systems, and medical imaging ML. Trained classical Indian dancer in Bharatanatyam and Kathak.',
-  generator: 'v0.app',
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.title} · Software engineer, CS @ UMass Amherst`,
+    template: `%s · ${site.title}`,
+  },
+  description: site.description,
+  applicationName: site.title,
+  authors: [{ name: site.title, url: site.url }],
+  keywords: [
+    "Arundhati Vasishth",
+    "software engineer",
+    "UMass Amherst",
+    "AI infrastructure",
+    "distributed systems",
+    "machine learning",
+    "quantitative research",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: site.title,
+    title: `${site.title} · Software engineer`,
+    description: site.description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.title} · Software engineer`,
+    description: site.description,
+  },
   icons: {
     icon: [
       {

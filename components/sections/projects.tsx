@@ -1,137 +1,145 @@
-import { ArrowUpRight } from "lucide-react"
-import { projects } from "@/lib/content"
+import Link from "next/link"
+import { ArrowUpRight, ChevronRight } from "lucide-react"
+import { additionalProjects, featuredProjects, proof } from "@/lib/content"
 import { badgeIcons, type BadgeIconKey } from "@/components/icons"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
-import { TiltCard } from "@/components/tilt-card"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { ProjectVisual } from "@/components/work/project-visual"
+import { cn } from "@/lib/utils"
 
 export function Projects() {
   return (
     <section id="projects" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
       <SectionHeading
-        index="03"
-        title="Projects"
-        kicker="Applied AI, from gesture recognition to prediction markets."
+        index="02"
+        title="Work"
+        kicker="Systems where the model is the easy part. Each one has a full case study."
       />
 
-      <div className="grid gap-5 md:grid-cols-2">
-        {projects.map((project, i) => {
-          const Icon = badgeIcons[project.id as BadgeIconKey]
+      <div className="flex flex-col gap-6 sm:gap-8">
+        {featuredProjects.map((project, i) => {
+          const Icon = badgeIcons[project.slug as BadgeIconKey]
+          const repo = project.links.find((l) => l.kind === "repo")
           return (
-            <Reveal key={project.id} delay={(i % 2) * 90}>
-              <TiltCard className="h-full">
-                <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-shadow duration-300 ease-apple hover:shadow-lift sm:p-9">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-primary">
-                    {Icon ? <Icon className="h-6 w-6" /> : null}
-                  </span>
+            <Reveal key={project.slug}>
+              <article className="grid overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-shadow duration-500 ease-apple hover:shadow-lift grid-cols-[minmax(0,1fr)] lg:grid-cols-2">
+                <div className={cn("flex min-w-0 flex-col p-7 sm:p-10", i % 2 === 1 && "lg:order-2")}>
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary">
+                      {Icon ? <Icon className="h-5 w-5" /> : null}
+                    </span>
+                    <p className="text-xs font-medium text-muted-foreground">{project.context}</p>
+                  </div>
 
-                  <h3 className="mt-6 text-2xl font-semibold text-foreground sm:text-[1.75rem]">{project.name}</h3>
-                  <p className="mt-2 text-pretty text-[15px] leading-snug text-foreground/75">{project.tagline}</p>
-                  <p className="mt-2 text-xs font-medium tabular-nums text-muted-foreground">{project.meta}</p>
+                  <h3 className="mt-6 text-3xl font-semibold text-foreground sm:text-4xl">{project.name}</h3>
+                  <p className="mt-3 text-pretty text-lg leading-snug text-foreground/85">{project.tagline}</p>
+                  <p className="mt-4 text-pretty text-[15px] leading-relaxed text-muted-foreground">{project.summary}</p>
 
-                  {project.teamNote ? (
-                    <p className="mt-3 text-xs italic text-muted-foreground">{project.teamNote}</p>
-                  ) : null}
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.stack.slice(0, 5).map((t) => (
                       <span key={t} className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground">
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mt-auto flex items-center gap-5 pt-6">
-                    <Dialog>
-                      <DialogTrigger
-                        render={
-                          <button
-                            type="button"
-                            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity duration-200 ease-apple hover:opacity-90"
-                          />
-                        }
-                      >
-                        View case study
-                        <ArrowUpRight className="h-4 w-4" />
-                      </DialogTrigger>
-                      <DialogContent className="max-h-[85svh] overflow-y-auto sm:max-w-lg">
-                        <DialogHeader>
-                          <span className="mb-1 flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary">
-                            {Icon ? <Icon className="h-5 w-5" /> : null}
-                          </span>
-                          <DialogTitle className="text-2xl font-semibold tracking-tight">{project.name}</DialogTitle>
-                          <DialogDescription>{project.tagline}</DialogDescription>
-                        </DialogHeader>
-
-                        {project.teamNote ? (
-                          <p className="text-xs italic text-muted-foreground">{project.teamNote}</p>
-                        ) : null}
-
-                        {project.callout ? (
-                          <p className="rounded-2xl bg-secondary px-4 py-3 text-sm leading-relaxed text-foreground/85">
-                            {project.callout}
-                          </p>
-                        ) : null}
-
-                        <ul className="flex flex-col gap-2.5">
-                          {project.points.map((point, p) => (
-                            <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
-                              <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />
-                              <span className="text-pretty">{point}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((t) => (
-                            <span
-                              key={t}
-                              className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-
-                        {project.link ? (
-                          <a
-                            href={project.link.href}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-opacity duration-200 hover:opacity-80"
-                          >
-                            {project.link.label}
-                            <ArrowUpRight className="h-4 w-4" />
-                          </a>
-                        ) : null}
-                      </DialogContent>
-                    </Dialog>
-
-                    {project.link ? (
+                  <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-8">
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className="inline-flex items-center gap-1 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity duration-300 ease-apple hover:opacity-90"
+                    >
+                      Read the case study
+                      <span className="sr-only"> for {project.name}</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Link>
+                    {repo ? (
                       <a
-                        href={project.link.href}
+                        href={repo.href}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-opacity duration-200 hover:opacity-80"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                       >
-                        Repository
-                        <ArrowUpRight className="h-3.5 w-3.5" />
+                        Code
+                        <span className="sr-only"> for {project.name} (opens GitHub)</span>
+                        <ArrowUpRight className="h-4 w-4" />
                       </a>
                     ) : null}
+                    {project.status ? <span className="text-xs text-muted-foreground">{project.status}</span> : null}
                   </div>
-                </article>
-              </TiltCard>
+                </div>
+
+                <div
+                  className={cn(
+                    "flex min-w-0 items-center border-t border-border bg-background/60 p-5 sm:p-10 lg:border-t-0",
+                    i % 2 === 1 ? "lg:order-1 lg:border-r" : "lg:border-l",
+                  )}
+                >
+                  <div className="w-full">
+                    <ProjectVisual visual={project.architecture.visual} compact />
+                  </div>
+                </div>
+              </article>
             </Reveal>
           )
         })}
+      </div>
+
+      {/* Numbers that can be checked against a public source. */}
+      <Reveal className="mt-16 sm:mt-20">
+        <h3 className="sr-only">Proof of work</h3>
+        <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border bg-border lg:grid-cols-4">
+          {proof.map((item) => {
+            const external = item.href.startsWith("http")
+            return (
+              <li key={item.label} className="bg-card">
+                <a
+                  href={item.href}
+                  {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+                  className="group flex h-full flex-col gap-1 p-6 transition-colors hover:bg-secondary/60 sm:p-8"
+                >
+                  <span className="text-3xl font-semibold tabular-nums tracking-tight text-foreground sm:text-4xl">
+                    {item.value}
+                  </span>
+                  <span className="text-pretty text-sm leading-snug text-muted-foreground group-hover:text-foreground/80">
+                    {item.label}
+                  </span>
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </Reveal>
+
+      <div className="mt-20 sm:mt-24">
+        <Reveal>
+          <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">More projects</h3>
+        </Reveal>
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          {additionalProjects.map((project, i) => {
+            const Icon = badgeIcons[project.slug as BadgeIconKey]
+            return (
+              <Reveal key={project.slug} delay={i * 90}>
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="group flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-shadow duration-500 ease-apple hover:shadow-lift sm:p-8"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary">
+                      {Icon ? <Icon className="h-5 w-5" /> : null}
+                    </span>
+                    <p className="text-xs font-medium text-muted-foreground">{project.context}</p>
+                  </div>
+                  <h4 className="mt-5 text-2xl font-semibold text-foreground">{project.name}</h4>
+                  <p className="mt-2 text-pretty text-[15px] leading-snug text-foreground/80">{project.tagline}</p>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-medium text-primary">
+                    Read more
+                    <ChevronRight className="h-4 w-4 transition-transform duration-300 ease-apple group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              </Reveal>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

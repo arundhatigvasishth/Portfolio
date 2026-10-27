@@ -10,7 +10,7 @@ export function Experience() {
   return (
     <section id="experience" className="relative">
       <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
-        <SectionHeading index="02" title="Experience" kicker="Where the AI systems meet real stakes." />
+        <SectionHeading index="04" title="Experience" kicker="Where the work meets real stakes." />
 
         <Accordion defaultValue={experience[0] ? [experience[0].id] : []} className="flex flex-col gap-4">
           {experience.map((job, i) => {
@@ -40,11 +40,14 @@ export function Experience() {
                       <div>
                         <h3 className="text-lg font-semibold text-foreground sm:text-xl">{job.role}</h3>
                         <p className="mt-0.5 text-pretty text-sm text-foreground/75">{job.org}</p>
-                        <p className="text-sm text-muted-foreground">{job.place}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {job.place}
+                          <span className="sm:hidden"> · {job.period}</span>
+                        </p>
                       </div>
                     </div>
 
-                    <span className="shrink-0 rounded-full bg-secondary px-3 py-1 text-xs font-medium tabular-nums text-muted-foreground">
+                    <span className="hidden shrink-0 rounded-full bg-secondary px-3 py-1 text-xs sm:inline-flex font-medium tabular-nums text-muted-foreground">
                       {job.period}
                     </span>
                   </AccordionTrigger>
@@ -84,8 +87,7 @@ export function Experience() {
                         {job.link ? (
                           <a
                             href={job.link.href}
-                            target="_blank"
-                            rel="noreferrer noopener"
+                            {...(job.link.href.startsWith("http") ? { target: "_blank", rel: "noreferrer noopener" } : {})}
                             className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-opacity duration-200 hover:opacity-80"
                           >
                             {job.link.label}

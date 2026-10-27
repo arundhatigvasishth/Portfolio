@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Compass, FileText, Mail, Search } from "lucide-react"
-import { nav, profile } from "@/lib/content"
+import { Compass, FileText, Layers, Mail, Search } from "lucide-react"
+import { nav, profile, projects } from "@/lib/content"
 import { IconGithub, IconLinkedin } from "@/components/icons"
 import {
   Command,
@@ -19,9 +19,12 @@ import {
 const OPEN_EVENT = "open-command-palette"
 
 function go(href: string) {
-  if (href.startsWith("#")) {
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })
-    history.replaceState(null, "", href)
+  const hash = href.startsWith("/#") ? href.slice(1) : href.startsWith("#") ? href : null
+  if (hash && window.location.pathname === "/") {
+    document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" })
+    history.replaceState(null, "", hash)
+  } else if (href.startsWith("/") && !href.endsWith(".pdf")) {
+    window.location.href = href
   } else if (href.startsWith("mailto:")) {
     window.location.href = href
   } else {
@@ -63,7 +66,7 @@ export function SiteCommand() {
       description="Navigate the site or connect"
     >
       <Command>
-        <CommandInput placeholder="Jump to a section, or connect..." />
+        <CommandInput placeholder="Jump to a section or case study..." />
         <CommandList>
           <CommandEmpty>No results.</CommandEmpty>
           <CommandGroup heading="Navigate">
@@ -71,6 +74,15 @@ export function SiteCommand() {
               <CommandItem key={item.href} onSelect={() => select(item.href)}>
                 <Compass />
                 {item.label}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Case studies">
+            {projects.map((p) => (
+              <CommandItem key={p.slug} value={`${p.name} ${p.tagline}`} onSelect={() => select(`/work/${p.slug}`)}>
+                <Layers />
+                {p.name}
               </CommandItem>
             ))}
           </CommandGroup>
