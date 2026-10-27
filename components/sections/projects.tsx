@@ -5,13 +5,14 @@ import { badgeIcons, type BadgeIconKey } from "@/components/icons"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
 import { ProjectVisual } from "@/components/work/project-visual"
+import { TextPlate } from "@/components/text-plate"
 import { cn } from "@/lib/utils"
 
 export function Projects() {
   return (
     <section id="projects" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
       <SectionHeading
-        index="02"
+        index="03"
         title="Work"
         kicker="Systems where the model is the easy part. Each one has a full case study."
       />
@@ -113,29 +114,55 @@ export function Projects() {
       <div className="mt-20 sm:mt-24">
         <Reveal>
           <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">More projects</h3>
+          <p className="mt-2 text-pretty text-muted-foreground">
+            <TextPlate>Hackathon builds. Go ahead and poke them.</TextPlate>
+          </p>
         </Reveal>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {additionalProjects.map((project, i) => {
             const Icon = badgeIcons[project.slug as BadgeIconKey]
             return (
               <Reveal key={project.slug} delay={i * 90}>
-                <Link
-                  href={`/work/${project.slug}`}
-                  className="group flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-shadow duration-500 ease-apple hover:shadow-lift sm:p-8"
-                >
-                  <div className="flex items-center gap-3">
+                {/* Not a whole-card link: the preview inside is interactive. */}
+                <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-soft transition-shadow duration-500 ease-apple hover:shadow-lift sm:p-8">
+                  <ProjectVisual visual={project.architecture.visual} compact />
+                  <div className="mt-7 flex items-center gap-3">
                     <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary">
                       {Icon ? <Icon className="h-5 w-5" /> : null}
                     </span>
                     <p className="text-xs font-medium text-muted-foreground">{project.context}</p>
                   </div>
-                  <h4 className="mt-5 text-2xl font-semibold text-foreground">{project.name}</h4>
+                  <h4 className="mt-5 text-2xl font-semibold text-foreground">
+                    <Link href={`/work/${project.slug}`} className="hover:text-primary">
+                      {project.name}
+                    </Link>
+                  </h4>
                   <p className="mt-2 text-pretty text-[15px] leading-snug text-foreground/80">{project.tagline}</p>
-                  <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-medium text-primary">
-                    Read more
-                    <ChevronRight className="h-4 w-4 transition-transform duration-300 ease-apple group-hover:translate-x-0.5" />
-                  </span>
-                </Link>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-6">
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className="group inline-flex items-center gap-1 text-sm font-medium text-primary"
+                    >
+                      Read the case study
+                      <span className="sr-only"> for {project.name}</span>
+                      <ChevronRight className="h-4 w-4 transition-transform duration-300 ease-apple group-hover:translate-x-0.5" />
+                    </Link>
+                    {project.links
+                      .filter((l) => l.kind === "demo" || l.kind === "video")
+                      .map((l) => (
+                        <a
+                          key={l.href}
+                          href={l.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                        >
+                          {l.label}
+                          <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      ))}
+                  </div>
+                </article>
               </Reveal>
             )
           })}

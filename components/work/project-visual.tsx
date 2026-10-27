@@ -6,6 +6,8 @@ import { FlowDiagram, type FlowLane } from "@/components/work/flow-diagram"
 import { WhyroutedSim } from "@/components/work/whyrouted-sim"
 import { TokenwiseGrid } from "@/components/work/tokenwise-grid"
 import { KnowYorkGauntlet } from "@/components/work/knowyork-gauntlet"
+import { FingerSolveQuiz } from "@/components/work/fingersolve-quiz"
+import { MedEchoTranslate } from "@/components/work/medecho-translate"
 
 // Three.js only loads on the page that shows the hand.
 const HandLandmarks3D = dynamic(
@@ -63,19 +65,6 @@ const medechoLanes: FlowLane[] = [
   },
 ]
 
-const fingersolveLanes: FlowLane[] = [
-  {
-    label: "Pipeline",
-    nodes: [
-      { title: "Camera" },
-      { title: "MediaPipe", accent: true },
-      { title: "21 landmarks" },
-      { title: "Classifier", accent: true },
-      { title: "Answer" },
-    ],
-  },
-]
-
 export function ProjectVisual({ visual, compact = false }: { visual: VisualKey; compact?: boolean }) {
   switch (visual) {
     case "whyrouted":
@@ -87,8 +76,8 @@ export function ProjectVisual({ visual, compact = false }: { visual: VisualKey; 
     case "tracify":
       return <FlowDiagram lanes={tracifyLanes} compact={compact} />
     case "medecho":
-      return <FlowDiagram lanes={compact ? medechoLanes.slice(0, 1) : medechoLanes} compact={compact} />
+      return compact ? <MedEchoTranslate /> : <FlowDiagram lanes={medechoLanes} />
     case "fingersolve":
-      return compact ? <FlowDiagram lanes={fingersolveLanes} compact /> : <HandLandmarks3D />
+      return compact ? <FingerSolveQuiz /> : <HandLandmarks3D />
   }
 }

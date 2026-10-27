@@ -15,7 +15,7 @@ const stageStyle: Record<ResearchItem["stage"], string> = {
 export function Research() {
   return (
     <section id="research" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
-      <SectionHeading index="03" title="Quantitative research" kicker={research.org} />
+      <SectionHeading index="04" title="Quantitative research" kicker={research.org} />
 
       <Reveal>
         <p className="max-w-2xl text-pretty text-lg leading-relaxed text-foreground/85">

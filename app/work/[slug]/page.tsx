@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowUpRight, ChevronRight } from "lucide-react"
-import { projects, site, type WorkLink } from "@/lib/content"
+import { projects, site, thread, type WorkLink } from "@/lib/content"
 import { SiteNav } from "@/components/site-nav"
 import { Contact } from "@/components/sections/contact"
 import { Reveal } from "@/components/reveal"
@@ -48,6 +48,10 @@ export default async function CaseStudyPage({ params }: Props) {
   if (index === -1) notFound()
   const project = projects[index]
   const next = projects[(index + 1) % projects.length]
+  const stopIndex = thread.stops.findIndex((t) => t.href === `/work/${project.slug}`)
+  const stop = thread.stops[stopIndex]
+  const before = stopIndex > 0 ? thread.stops[stopIndex - 1] : null
+  const playable = project.slug === "fingersolve" || project.slug === "medecho"
 
   return (
     <>
@@ -113,7 +117,7 @@ export default async function CaseStudyPage({ params }: Props) {
             {/* Results */}
             <Reveal>
               <h2 className="sr-only">Results</h2>
-              <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border bg-border lg:grid-cols-4">
+              <dl className={`grid gap-px overflow-hidden rounded-3xl border border-border bg-border ${project.results.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4"}`}>
                 {project.results.map((m) => (
                   <div key={m.label} className="flex flex-col gap-1 bg-card p-6 sm:p-8">
                     <dt className="order-2 text-pretty text-sm leading-snug text-muted-foreground">{m.label}</dt>
@@ -126,6 +130,31 @@ export default async function CaseStudyPage({ params }: Props) {
               </dl>
               {project.resultsNote ? <p className="mt-4 text-sm text-muted-foreground">{project.resultsNote}</p> : null}
             </Reveal>
+
+            {stop ? (
+              <Reveal>
+                <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-primary/[0.04] p-7 sm:p-10">
+                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-primary">Why I built it</p>
+                  <p className="mt-4 max-w-3xl text-pretty text-xl leading-snug text-foreground sm:text-2xl">{stop.why}</p>
+                  <p className="mt-5 max-w-3xl text-pretty text-[15px] leading-relaxed text-muted-foreground">
+                    <span className="font-medium text-foreground/80">What I took from it: </span>
+                    {stop.lesson}
+                  </p>
+                  {before ? (
+                    <Link
+                      href={before.href}
+                      className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      Came after {before.title}
+                    </Link>
+                  ) : null}
+                  <Link href="/#thread" className="ml-5 mt-6 inline-flex text-sm text-muted-foreground hover:text-foreground">
+                    See the whole thread
+                  </Link>
+                </div>
+              </Reveal>
+            ) : null}
 
             {/* Problem and role */}
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -175,6 +204,15 @@ export default async function CaseStudyPage({ params }: Props) {
                 </figure>
               ) : null}
             </Reveal>
+
+            {playable ? (
+              <Reveal>
+                <h2 className="text-3xl font-semibold text-foreground sm:text-4xl">Play with it</h2>
+                <div className="mt-8 max-w-xl rounded-3xl border border-border bg-card p-5 shadow-soft sm:p-8">
+                  <ProjectVisual visual={project.architecture.visual} compact />
+                </div>
+              </Reveal>
+            ) : null}
 
             {project.embed ? (
               <Reveal>

@@ -17,7 +17,7 @@ export const site = {
 export const profile = {
   name: "Arundhati Vasishth",
   location: "Amherst, MA",
-  school: "Computer Science · UMass Amherst",
+  school: "Junior · Computer Science · UMass Amherst",
   tagline: "I build software that makes ambitious ideas work in the real world.",
   intro:
     "Right now that means a load balancer that can explain its own routing decisions, an LLM router that shifts down when the power grid peaks, and a regulatory assistant for Massachusetts public health inspectors.",
@@ -396,6 +396,109 @@ export const featuredProjects = projects.filter((p) => p.featured)
 export const additionalProjects = projects.filter((p) => !p.featured)
 
 // ---------------------------------------------------------------------------
+// The thread: why each project came out of the one before it. Personal
+// narrative in Arundhati's voice; edit freely.
+// ---------------------------------------------------------------------------
+
+export type ThreadStop = {
+  period: string
+  title: string
+  kind: "Project" | "Research" | "Role"
+  href: string
+  why: string
+  lesson: string
+}
+
+export const thread = {
+  title: "The thread",
+  kicker: "Gestures, X-rays, markets, and load balancers. It looks scattered from the outside.",
+  intro:
+    "From the inside it's one question, asked a little louder each time: what does it take for a model to be trustworthy enough to act on? Here's how each project led to the next.",
+  stops: [
+    {
+      period: "Spring 2025",
+      title: "FingerSolve",
+      kind: "Project",
+      href: "/work/fingersolve",
+      why: "Years of Bharatanatyam taught me that a hand can say something precise. I wanted to know if a camera could read it as well as my dance teacher could.",
+      lesson: "The model reached 94%, but the biggest drop in user errors came from showing its confidence on screen. The system around the model mattered more than I expected.",
+    },
+    {
+      period: "Summer 2025",
+      title: "Medical imaging research at IISc",
+      kind: "Research",
+      href: "/#experience",
+      why: "Winning a prize with a 94% classifier made me suspicious of my own numbers. I spent a summer comparing six pipelines on 8,700+ scans to learn when an accuracy figure actually means something.",
+      lesson: "Evaluate across splits, report the boring metrics, and never trust one good run.",
+    },
+    {
+      period: "Fall 2025",
+      title: "Volatility research at MAIF",
+      kind: "Research",
+      href: "/#research",
+      why: "I wanted a field where being wrong shows up right away. Options volatility was the hardest problem the fund would let me near.",
+      lesson: "Exploring a model isn't the same as proving a strategy. I learned to say out loud which one I've done.",
+    },
+    {
+      period: "Spring 2026",
+      title: "MedEcho",
+      kind: "Project",
+      href: "/work/medecho",
+      why: "IISc left me with X-ray classifiers and no patient in sight. At HackPrinceton I built the other half: what someone actually hears about their scan, in their own language.",
+      lesson: "A fluent explanation is convincing whether or not it's right. That scared me in a useful way.",
+    },
+    {
+      period: "Spring 2026",
+      title: "Prediction-market arbitrage",
+      kind: "Research",
+      href: "/#research",
+      why: "Two markets asking the same question in different words is a language problem dressed up as finance, so I took the matching layer.",
+      lesson: "An LLM's label is a claim, not a fact. It needs a confidence threshold and a test behind it.",
+    },
+    {
+      period: "Spring to Summer 2026",
+      title: "Tracify at EOHHS",
+      kind: "Role",
+      href: "/work/tracify",
+      why: "MedEcho's lesson, with legal stakes. An inspector can't act on a confident guess, so every answer had to point to the regulation it came from.",
+      lesson: "Grounding isn't a feature you add at the end. It decides the architecture.",
+    },
+    {
+      period: "Fall 2026",
+      title: "whyrouted",
+      kind: "Project",
+      href: "/work/whyrouted",
+      why: "Everything I'd built could cite its answer except the infrastructure underneath it. I wanted a router that could answer \"why did my request go there?\"",
+      lesson: "An explanation is only as good as the record behind it, so we log the decision first and explain it second.",
+    },
+    {
+      period: "Fall 2026",
+      title: "KnowYork",
+      kind: "Project",
+      href: "/work/knowyork",
+      why: "whyrouted explains a decision after it happens. Once an agent holds a wallet, explaining isn't enough. It has to be stopped before the money moves.",
+      lesson: "Assume the model will be fooled, then make sure it doesn't matter.",
+    },
+    {
+      period: "Fall 2026",
+      title: "Tokenwise",
+      kind: "Project",
+      href: "/work/tokenwise",
+      why: "Routing again, with a new question: not which replica, but which model, and whether the grid can afford it right now.",
+      lesson: "Label what's simulated. A demo only convinces people if they can tell what's real.",
+    },
+    {
+      period: "Fall 2026",
+      title: "Earnings propagation",
+      kind: "Research",
+      href: "/#research",
+      why: "whyrouted's decision log is a map of where requests travel. Markets have the same shape: when news hits one company, where does it go next?",
+      lesson: "Still learning this one. So far: point-in-time data first, because a model that peeks at the future learns nothing.",
+    },
+  ] satisfies ThreadStop[],
+}
+
+// ---------------------------------------------------------------------------
 // Quantitative research at MAIF.
 // ---------------------------------------------------------------------------
 
@@ -715,10 +818,10 @@ export const contact = {
 }
 
 export const nav = [
+  { label: "Story", href: "/#thread" },
   { label: "Work", href: "/#projects" },
   { label: "Research", href: "/#research" },
   { label: "Experience", href: "/#experience" },
   { label: "Leadership", href: "/#leadership" },
-  { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ]

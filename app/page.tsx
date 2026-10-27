@@ -1,6 +1,7 @@
 import { SiteNav } from "@/components/site-nav"
 import { Hero } from "@/components/sections/hero"
 import { About } from "@/components/sections/about"
+import { Thread } from "@/components/sections/thread"
 import { Projects } from "@/components/sections/projects"
 import { Research } from "@/components/sections/research"
 import { Experience } from "@/components/sections/experience"
@@ -15,6 +16,7 @@ export default function Page() {
       <main>
         <Hero />
         <About />
+        <Thread />
         <Projects />
         <Research />
         <Experience />
