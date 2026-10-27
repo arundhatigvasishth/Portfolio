@@ -4,60 +4,69 @@ import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { nav, profile } from "@/lib/content"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { TextPlate } from "@/components/text-plate"
 import { CommandPaletteTrigger } from "@/components/site-command"
+
+const iconButton =
+  "inline-flex h-8 w-8 items-center justify-center rounded-full text-foreground/70 transition-colors duration-200 ease-apple hover:bg-foreground/[0.06] hover:text-foreground"
 
 export function SiteNav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => setScrolled(window.scrollY > 12)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const frosted = scrolled || open
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "border-b border-border bg-background/80 backdrop-blur-md" : "border-b border-transparent"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ease-apple ${
+        frosted ? "glass border-border" : "border-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <a href="#top" className="group flex items-center gap-2 font-serif text-lg font-semibold tracking-tight">
-          <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5 text-primary">Arundhati</TextPlate>
-          <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5 text-accent transition-transform group-hover:translate-x-0.5">
-            Vasishth
-          </TextPlate>
+      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-8">
+        <a href="#top" className="text-[15px] font-semibold tracking-tight text-foreground">
+          Arundhati Vasishth
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
-          <ul className="flex items-center gap-7 text-sm">
+        <div className="hidden items-center gap-6 md:flex">
+          <ul className="flex items-center gap-1 text-[13px]">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="relative text-foreground/70 transition-colors hover:text-foreground after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+                  className="rounded-full px-3 py-1.5 text-foreground/70 transition-colors duration-200 ease-apple hover:text-foreground"
                 >
-                  <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{item.label}</TextPlate>
+                  {item.label}
                 </a>
               </li>
             ))}
           </ul>
-          <CommandPaletteTrigger className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/80 transition-colors hover:border-accent hover:text-accent" />
-          <ThemeToggle />
+          <div className="flex items-center gap-1">
+            <CommandPaletteTrigger className={iconButton} />
+            <ThemeToggle />
+            <a
+              href={profile.resume}
+              className="ml-2 rounded-full bg-primary px-3.5 py-1.5 text-[13px] font-medium text-primary-foreground transition-opacity duration-200 ease-apple hover:opacity-90"
+            >
+              Resume
+            </a>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
-          <CommandPaletteTrigger className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/80 transition-colors hover:border-accent hover:text-accent" />
+        <div className="flex items-center gap-1 md:hidden">
+          <CommandPaletteTrigger className={iconButton} />
           <ThemeToggle />
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/80"
+            className={iconButton}
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -65,14 +74,14 @@ export function SiteNav() {
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
-          <ul className="mx-auto flex max-w-6xl flex-col px-5 py-2 sm:px-8">
+        <div className="border-t border-border md:hidden">
+          <ul className="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-8">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3 text-base text-foreground/80 transition-colors hover:text-accent"
+                  className="block border-b border-border py-3.5 text-lg font-medium tracking-tight text-foreground/90 transition-colors hover:text-primary"
                 >
                   {item.label}
                 </a>
@@ -82,7 +91,7 @@ export function SiteNav() {
               <a
                 href={profile.resume}
                 onClick={() => setOpen(false)}
-                className="block py-3 text-base text-primary"
+                className="block py-3.5 text-lg font-medium tracking-tight text-primary"
               >
                 Resume
               </a>

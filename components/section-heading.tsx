@@ -12,19 +12,19 @@ export function SectionHeading({
   kicker?: string
 }) {
   return (
-    <Reveal className="mb-10 flex flex-col gap-4 sm:mb-14">
-      <div className="flex items-center gap-4">
-        <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5 font-mono text-xs tracking-[0.3em] text-accent">
+    <Reveal className="mb-12 flex flex-col gap-5 sm:mb-16">
+      <div className="flex items-center gap-3">
+        <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5 text-xs font-medium tabular-nums tracking-[0.12em] text-muted-foreground">
           {index}
         </TextPlate>
-        <BeatStrip />
+        <BeatStrip className="opacity-70" />
       </div>
       <div>
-        <h2 className="text-balance font-serif text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+        <h2 className="text-balance text-4xl font-semibold leading-[1.05] text-foreground sm:text-5xl md:text-6xl">
           <TextPlate className="px-1.5 py-0.5 -mx-1.5 -my-0.5">{title}</TextPlate>
         </h2>
         {kicker ? (
-          <p className="mt-3 max-w-xl text-pretty text-muted-foreground">
+          <p className="mt-4 max-w-xl text-pretty text-lg leading-snug text-muted-foreground sm:text-xl">
             <TextPlate>{kicker}</TextPlate>
           </p>
         ) : null}

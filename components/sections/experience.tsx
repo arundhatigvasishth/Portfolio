@@ -8,22 +8,22 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 export function Experience() {
   return (
-    <section id="experience" className="relative border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+    <section id="experience" className="relative">
+      <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
         <SectionHeading index="02" title="Experience" kicker="Where the AI systems meet real stakes." />
 
-        <Accordion defaultValue={experience[0] ? [experience[0].id] : []} className="flex flex-col gap-5">
+        <Accordion defaultValue={experience[0] ? [experience[0].id] : []} className="flex flex-col gap-4">
           {experience.map((job, i) => {
             const Icon = badgeIcons[job.id as BadgeIconKey]
             return (
               <Reveal key={job.id} delay={i * 100}>
                 <AccordionItem
                   value={job.id}
-                  className="group overflow-hidden rounded-2xl border border-border bg-background transition-colors hover:border-accent/60"
+                  className="group overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-shadow duration-300 ease-apple hover:shadow-lift"
                 >
-                  <AccordionTrigger className="items-center gap-4 rounded-none px-6 py-5 hover:no-underline sm:px-8">
+                  <AccordionTrigger className="items-center gap-4 rounded-none px-5 py-5 hover:no-underline sm:px-8 sm:py-6">
                     <div className="flex flex-1 items-center gap-4 text-left">
-                      <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-card p-1.5 text-primary transition-colors group-hover:border-accent">
+                      <span className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white p-1.5 text-primary">
                         {job.logo ? (
                           <Image
                             src={job.logo.src}
@@ -38,31 +38,31 @@ export function Experience() {
                       </span>
 
                       <div>
-                        <h3 className="font-serif text-lg font-semibold text-foreground sm:text-xl">{job.role}</h3>
-                        <p className="mt-0.5 text-pretty text-sm text-foreground/80">{job.org}</p>
+                        <h3 className="text-lg font-semibold text-foreground sm:text-xl">{job.role}</h3>
+                        <p className="mt-0.5 text-pretty text-sm text-foreground/75">{job.org}</p>
                         <p className="text-sm text-muted-foreground">{job.place}</p>
                       </div>
                     </div>
 
-                    <span className="shrink-0 rounded-full border border-border px-3 py-1 font-mono text-xs tracking-wide text-muted-foreground">
+                    <span className="shrink-0 rounded-full bg-secondary px-3 py-1 text-xs font-medium tabular-nums text-muted-foreground">
                       {job.period}
                     </span>
                   </AccordionTrigger>
 
-                  <AccordionContent className="px-6 sm:px-8">
+                  <AccordionContent className="px-5 sm:px-8">
                     <div className="flex flex-col gap-6 border-t border-border pt-6 sm:flex-row sm:gap-8">
                       <div className="flex-1">
                         {job.pointGroups ? (
                           <div className="flex flex-col gap-4">
                             {job.pointGroups.map((group, g) => (
                               <div key={g} className="flex flex-col gap-3">
-                                <span className="inline-flex w-fit shrink-0 rounded-full border border-border px-2.5 py-0.5 font-mono text-[11px] tracking-wide text-muted-foreground">
+                                <span className="inline-flex w-fit shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-medium tabular-nums text-muted-foreground">
                                   {group.period}
                                 </span>
                                 <ul className="flex flex-col gap-3">
                                   {group.points.map((point, p) => (
                                     <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
-                                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                                      <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />
                                       <span className="text-pretty">{point}</span>
                                     </li>
                                   ))}
@@ -74,7 +74,7 @@ export function Experience() {
                           <ul className="flex flex-col gap-3">
                             {job.points.map((point, p) => (
                               <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
-                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                                <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />
                                 <span className="text-pretty">{point}</span>
                               </li>
                             ))}
@@ -86,7 +86,7 @@ export function Experience() {
                             href={job.link.href}
                             target="_blank"
                             rel="noreferrer noopener"
-                            className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-accent"
+                            className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-opacity duration-200 hover:opacity-80"
                           >
                             {job.link.label}
                             <ArrowUpRight className="h-4 w-4" />
@@ -103,7 +103,7 @@ export function Experience() {
                             className="group/feature block"
                           >
                             <div
-                              className={`relative w-full overflow-hidden rounded-xl border border-border ${
+                              className={`relative w-full overflow-hidden rounded-2xl border border-border shadow-soft ${
                                 job.feature.aspect === "3/4" ? "aspect-[3/4]" : "aspect-[3/2]"
                               }`}
                             >
@@ -112,10 +112,10 @@ export function Experience() {
                                 alt={job.feature.alt}
                                 fill
                                 sizes="(min-width: 768px) 16rem, (min-width: 640px) 14rem, 100vw"
-                                className="object-cover transition-transform duration-300 group-hover/feature:scale-105"
+                                className="object-cover transition-transform duration-700 ease-apple group-hover/feature:scale-[1.03]"
                               />
                             </div>
-                            <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover/feature:text-accent">
+                            <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover/feature:text-primary">
                               {job.feature.caption}
                               <ArrowUpRight className="h-3.5 w-3.5" />
                             </p>

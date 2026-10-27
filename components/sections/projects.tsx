@@ -15,27 +15,27 @@ import {
 
 export function Projects() {
   return (
-    <section id="projects" className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+    <section id="projects" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
       <SectionHeading
         index="03"
         title="Projects"
         kicker="Applied AI, from gesture recognition to prediction markets."
       />
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {projects.map((project, i) => {
           const Icon = badgeIcons[project.id as BadgeIconKey]
           return (
             <Reveal key={project.id} delay={(i % 2) * 90}>
               <TiltCard className="h-full">
-                <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/60 sm:p-7">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-primary">
+                <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft transition-shadow duration-300 ease-apple hover:shadow-lift sm:p-9">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-primary">
                     {Icon ? <Icon className="h-6 w-6" /> : null}
                   </span>
 
-                  <h3 className="mt-5 font-serif text-2xl font-semibold text-foreground">{project.name}</h3>
-                  <p className="mt-1.5 text-pretty text-sm font-medium text-foreground/80">{project.tagline}</p>
-                  <p className="mt-1 font-mono text-xs tracking-wide text-muted-foreground">{project.meta}</p>
+                  <h3 className="mt-6 text-2xl font-semibold text-foreground sm:text-[1.75rem]">{project.name}</h3>
+                  <p className="mt-2 text-pretty text-[15px] leading-snug text-foreground/75">{project.tagline}</p>
+                  <p className="mt-2 text-xs font-medium tabular-nums text-muted-foreground">{project.meta}</p>
 
                   {project.teamNote ? (
                     <p className="mt-3 text-xs italic text-muted-foreground">{project.teamNote}</p>
@@ -55,19 +55,19 @@ export function Projects() {
                         render={
                           <button
                             type="button"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-accent"
+                            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity duration-200 ease-apple hover:opacity-90"
                           />
                         }
                       >
                         View case study
                         <ArrowUpRight className="h-4 w-4" />
                       </DialogTrigger>
-                      <DialogContent className="sm:max-w-md">
+                      <DialogContent className="max-h-[85svh] overflow-y-auto sm:max-w-lg">
                         <DialogHeader>
-                          <span className="mb-1 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-primary">
+                          <span className="mb-1 flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary">
                             {Icon ? <Icon className="h-5 w-5" /> : null}
                           </span>
-                          <DialogTitle className="font-serif text-xl">{project.name}</DialogTitle>
+                          <DialogTitle className="text-2xl font-semibold tracking-tight">{project.name}</DialogTitle>
                           <DialogDescription>{project.tagline}</DialogDescription>
                         </DialogHeader>
 
@@ -76,7 +76,7 @@ export function Projects() {
                         ) : null}
 
                         {project.callout ? (
-                          <p className="rounded-lg border-l-2 border-accent bg-accent/10 px-4 py-3 text-sm leading-relaxed text-foreground/85">
+                          <p className="rounded-2xl bg-secondary px-4 py-3 text-sm leading-relaxed text-foreground/85">
                             {project.callout}
                           </p>
                         ) : null}
@@ -84,7 +84,7 @@ export function Projects() {
                         <ul className="flex flex-col gap-2.5">
                           {project.points.map((point, p) => (
                             <li key={p} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
-                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                              <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />
                               <span className="text-pretty">{point}</span>
                             </li>
                           ))}
@@ -106,7 +106,7 @@ export function Projects() {
                             href={project.link.href}
                             target="_blank"
                             rel="noreferrer noopener"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-accent"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-opacity duration-200 hover:opacity-80"
                           >
                             {project.link.label}
                             <ArrowUpRight className="h-4 w-4" />
@@ -120,7 +120,7 @@ export function Projects() {
                         href={project.link.href}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-accent"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-opacity duration-200 hover:opacity-80"
                       >
                         Repository
                         <ArrowUpRight className="h-3.5 w-3.5" />

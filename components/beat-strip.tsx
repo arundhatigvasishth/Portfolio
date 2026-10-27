@@ -12,7 +12,7 @@ export function BeatStrip({ className = "" }: { className?: string }) {
       {Array.from({ length: BEATS }).map((_, i) => (
         <span
           key={i}
-          className="beat-bar h-4 w-[3px] origin-bottom rounded-full"
+          className="beat-bar h-3 w-[2px] origin-bottom rounded-full"
           style={{
             backgroundColor: "var(--primary)",
             animation: `beat ${CYCLE_SECONDS}s linear infinite`,

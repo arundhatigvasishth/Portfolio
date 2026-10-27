@@ -37,8 +37,9 @@
   --color-foreground: var(--foreground);
   --color-background: var(--background);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Headings share the sans stack; existing font-serif classes resolve to it. */
+  --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -51,92 +52,118 @@
 
 :root {
   color-scheme: light;
-  /* Ivory background, oxblood text, maroon primary, gold accent */
-  --background: oklch(0.968 0.014 85);
-  --foreground: oklch(0.255 0.055 24);
-  --card: oklch(0.984 0.01 85);
-  --card-foreground: oklch(0.255 0.055 24);
-  --popover: oklch(0.984 0.01 85);
-  --popover-foreground: oklch(0.255 0.055 24);
-  --primary: oklch(0.375 0.12 22);
-  --primary-foreground: oklch(0.975 0.014 85);
-  --secondary: oklch(0.93 0.016 80);
-  --secondary-foreground: oklch(0.3 0.07 24);
-  --muted: oklch(0.928 0.015 82);
-  --muted-foreground: oklch(0.48 0.045 30);
-  --accent: oklch(0.73 0.13 74);
-  --accent-foreground: oklch(0.28 0.07 40);
-  --destructive: oklch(0.55 0.2 27);
-  --border: oklch(0.87 0.02 68);
-  --input: oklch(0.87 0.02 68);
-  --ring: oklch(0.73 0.13 74);
-  /* Chart marks are a separate, validated triple (contrast/CVD-checked
-     against the light surface) — deliberately distinct from --primary/--accent,
-     which are tuned for text and controls, not fills. */
-  --chart-1: oklch(0.5 0.16 20);
-  --chart-2: oklch(0.69 0.14 78);
-  --chart-3: oklch(0.58 0.17 195);
-  --chart-4: oklch(0.62 0.12 55);
-  --chart-5: oklch(0.44 0.09 18);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.984 0.01 85);
-  --sidebar-foreground: oklch(0.255 0.055 24);
-  --sidebar-primary: oklch(0.375 0.12 22);
-  --sidebar-primary-foreground: oklch(0.975 0.014 85);
-  --sidebar-accent: oklch(0.73 0.13 74);
-  --sidebar-accent-foreground: oklch(0.28 0.07 40);
-  --sidebar-border: oklch(0.87 0.02 68);
-  --sidebar-ring: oklch(0.73 0.13 74);
+  /* Neutral, Apple-like surfaces: off-white page, near-black ink, one blue accent.
+     --accent mirrors --primary so every hover state reads as the same blue. */
+  --background: oklch(0.988 0.002 286);
+  --foreground: oklch(0.21 0.004 286);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.004 286);
+  --popover: oklch(1 0 0 / 92%);
+  --popover-foreground: oklch(0.21 0.004 286);
+  --primary: oklch(0.53 0.19 256);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.003 286);
+  --secondary-foreground: oklch(0.3 0.006 286);
+  --muted: oklch(0.955 0.003 286);
+  --muted-foreground: oklch(0.5 0.008 286);
+  --accent: oklch(0.53 0.19 256);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.21 0.004 286 / 9%);
+  --input: oklch(0.21 0.004 286 / 12%);
+  --ring: oklch(0.53 0.19 256);
+  /* Categorical marks for the skills view: distinct hues, checked against the
+     light surface. Deliberately not --primary, which is tuned for text. */
+  --chart-1: oklch(0.53 0.19 256);
+  --chart-2: oklch(0.55 0.17 300);
+  --chart-3: oklch(0.56 0.12 175);
+  --chart-4: oklch(0.62 0.15 55);
+  --chart-5: oklch(0.45 0.02 286);
+  --radius: 0.875rem;
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 4%), 0 8px 24px -8px oklch(0 0 0 / 8%);
+  --shadow-lift: 0 2px 4px oklch(0 0 0 / 4%), 0 18px 40px -12px oklch(0 0 0 / 14%);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.21 0.004 286);
+  --sidebar-primary: oklch(0.53 0.19 256);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.955 0.003 286);
+  --sidebar-accent-foreground: oklch(0.21 0.004 286);
+  --sidebar-border: oklch(0.21 0.004 286 / 9%);
+  --sidebar-ring: oklch(0.53 0.19 256);
 }
 
 .dark {
   color-scheme: dark;
-  /* Near-black plum background, ivory text, gold primary */
-  --background: oklch(0.165 0.028 350);
-  --foreground: oklch(0.95 0.013 85);
-  --card: oklch(0.205 0.032 350);
-  --card-foreground: oklch(0.95 0.013 85);
-  --popover: oklch(0.205 0.032 350);
-  --popover-foreground: oklch(0.95 0.013 85);
-  --primary: oklch(0.79 0.13 80);
-  --primary-foreground: oklch(0.19 0.03 350);
-  --secondary: oklch(0.26 0.035 350);
-  --secondary-foreground: oklch(0.93 0.013 85);
-  --muted: oklch(0.255 0.032 350);
-  --muted-foreground: oklch(0.72 0.03 60);
-  --accent: oklch(0.73 0.13 74);
-  --accent-foreground: oklch(0.19 0.03 350);
+  /* Near-black page, raised graphite cards, brighter blue for contrast on dark. */
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.965 0.002 286);
+  --card: oklch(0.2 0.003 286);
+  --card-foreground: oklch(0.965 0.002 286);
+  --popover: oklch(0.22 0.003 286 / 92%);
+  --popover-foreground: oklch(0.965 0.002 286);
+  --primary: oklch(0.7 0.16 252);
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.26 0.004 286);
+  --secondary-foreground: oklch(0.92 0.003 286);
+  --muted: oklch(0.26 0.004 286);
+  --muted-foreground: oklch(0.7 0.006 286);
+  --accent: oklch(0.7 0.16 252);
+  --accent-foreground: oklch(0.13 0 0);
   --destructive: oklch(0.7 0.19 22);
-  --border: oklch(0.85 0.05 70 / 14%);
-  --input: oklch(0.85 0.05 70 / 18%);
-  --ring: oklch(0.79 0.13 80);
-  --chart-1: oklch(0.62 0.16 20);
-  --chart-2: oklch(0.66 0.14 78);
-  --chart-3: oklch(0.62 0.18 195);
-  --chart-4: oklch(0.55 0.13 18);
-  --chart-5: oklch(0.84 0.1 90);
-  --sidebar: oklch(0.205 0.032 350);
-  --sidebar-foreground: oklch(0.95 0.013 85);
-  --sidebar-primary: oklch(0.79 0.13 80);
-  --sidebar-primary-foreground: oklch(0.19 0.03 350);
-  --sidebar-accent: oklch(0.73 0.13 74);
-  --sidebar-accent-foreground: oklch(0.19 0.03 350);
-  --sidebar-border: oklch(0.85 0.05 70 / 14%);
-  --sidebar-ring: oklch(0.79 0.13 80);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.7 0.16 252);
+  --chart-1: oklch(0.7 0.16 252);
+  --chart-2: oklch(0.72 0.14 300);
+  --chart-3: oklch(0.74 0.12 175);
+  --chart-4: oklch(0.76 0.13 65);
+  --chart-5: oklch(0.8 0.01 286);
+  --shadow-soft: 0 1px 0 oklch(1 0 0 / 4%) inset, 0 8px 24px -8px oklch(0 0 0 / 60%);
+  --shadow-lift: 0 1px 0 oklch(1 0 0 / 6%) inset, 0 18px 44px -12px oklch(0 0 0 / 70%);
+  --sidebar: oklch(0.2 0.003 286);
+  --sidebar-foreground: oklch(0.965 0.002 286);
+  --sidebar-primary: oklch(0.7 0.16 252);
+  --sidebar-primary-foreground: oklch(0.13 0 0);
+  --sidebar-accent: oklch(0.26 0.004 286);
+  --sidebar-accent-foreground: oklch(0.965 0.002 286);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.7 0.16 252);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01", "ss03";
+    text-rendering: optimizeLegibility;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply font-serif;
+    @apply font-sans;
+    letter-spacing: -0.022em;
+  }
+  h1 {
+    letter-spacing: -0.035em;
+  }
+  h2 {
+    letter-spacing: -0.03em;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--primary) 22%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
@@ -144,14 +171,30 @@
   .text-balance {
     text-wrap: balance;
   }
+  /* Frosted glass, used by the nav and floating surfaces. */
+  .glass {
+    background: color-mix(in oklch, var(--background) 72%, transparent);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+  /* One easing curve for every interactive transition. */
+  .ease-apple {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }
 
 @keyframes beat {
   0%,
   100% {
-    transform: scaleY(0.35);
-    opacity: 0.35;
-    background-color: var(--primary);
+    transform: scaleY(0.3);
+    opacity: 0.22;
+    background-color: var(--muted-foreground);
   }
   6% {
     transform: scaleY(1);
@@ -159,14 +202,17 @@
     background-color: var(--accent);
   }
   22% {
-    transform: scaleY(0.35);
-    opacity: 0.35;
-    background-color: var(--primary);
+    transform: scaleY(0.3);
+    opacity: 0.22;
+    background-color: var(--muted-foreground);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .beat-bar {
     animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

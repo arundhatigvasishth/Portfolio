@@ -48,8 +48,8 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
       className={className}
       style={{
         opacity: animate ? (visible ? 1 : 0) : 1,
-        transform: animate ? (visible ? "none" : "translateY(22px)") : "none",
-        transition: animate ? `opacity 0.7s ${rhythmEasing} ${delay}ms, transform 0.7s ${rhythmEasing} ${delay}ms` : undefined,
+        transform: animate ? (visible ? "none" : "translateY(16px)") : "none",
+        transition: animate ? `opacity 0.9s ${rhythmEasing} ${delay}ms, transform 0.9s ${rhythmEasing} ${delay}ms` : undefined,
         willChange: animate ? "opacity, transform" : undefined,
       }}
     >

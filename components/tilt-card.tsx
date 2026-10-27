@@ -15,7 +15,7 @@ export function TiltCard({ children, className = "" }: { children: ReactNode; cl
     const r = el.getBoundingClientRect()
     const px = (e.clientX - r.left) / r.width - 0.5
     const py = (e.clientY - r.top) / r.height - 0.5
-    el.style.transform = `perspective(900px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 6).toFixed(2)}deg) translateY(-4px)`
+    el.style.transform = `perspective(900px) rotateX(${(-py * 2).toFixed(2)}deg) rotateY(${(px * 2.5).toFixed(2)}deg) translateY(-3px)`
   }
 
   const reset = () => {
@@ -29,7 +29,7 @@ export function TiltCard({ children, className = "" }: { children: ReactNode; cl
       onPointerMove={onMove}
       onPointerLeave={reset}
       className={className}
-      style={{ transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)", transformStyle: "preserve-3d" }}
+      style={{ transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)", transformStyle: "preserve-3d" }}
     >
       {children}
     </div>

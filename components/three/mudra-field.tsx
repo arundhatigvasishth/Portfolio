@@ -8,7 +8,7 @@ import { BEAT_SECONDS, pulse } from "@/lib/rhythm"
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion"
 
 // A lattice of nodes. The cursor behaves like a hand passing over the field:
-// nearby nodes lift and light up in gold, as if a gesture is being read.
+// nearby nodes lift and light up in the accent blue, as if a gesture is being read.
 function Field({ reduced }: { reduced: boolean }) {
   const { resolvedTheme } = useTheme()
   const cols = 26
@@ -26,8 +26,8 @@ function Field({ reduced }: { reduced: boolean }) {
   const colors = useMemo(() => {
     const dark = resolvedTheme === "dark"
     return {
-      rest: new THREE.Color(dark ? "#4a2a33" : "#f0e6dd"),
-      active: new THREE.Color(dark ? "#e6b352" : "#b9822a"),
+      rest: new THREE.Color(dark ? "#3a3a3c" : "#e5e5ea"),
+      active: new THREE.Color(dark ? "#4fa3ff" : "#0071e3"),
     }
   }, [resolvedTheme])
 
@@ -76,7 +76,7 @@ function Field({ reduced }: { reduced: boolean }) {
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
       <icosahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial roughness={0.4} metalness={0.3} />
+      <meshStandardMaterial roughness={0.22} metalness={0.15} />
     </instancedMesh>
   )
 }
@@ -88,8 +88,9 @@ function Rig() {
   }, [camera])
   return (
     <>
-      <ambientLight intensity={0.7} />
-      <pointLight position={[0, 0, 6]} intensity={30} color="#e6b352" />
+      <ambientLight intensity={0.85} />
+      <pointLight position={[0, 0, 6]} intensity={26} color="#ffffff" />
+      <pointLight position={[-4, 3, 4]} intensity={10} color="#8fc4ff" />
     </>
   )
 }

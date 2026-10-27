@@ -9,8 +9,8 @@ const categoryColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"]
 
 export function Skills() {
   return (
-    <section id="skills" className="relative border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+    <section id="skills" className="relative">
+      <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
         <SectionHeading index="04" title="Skills & Education" />
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
@@ -21,10 +21,10 @@ export function Skills() {
                 <Reveal key={group.label} delay={i * 90}>
                   <div>
                     <div className="mb-3 flex items-baseline justify-between gap-4">
-                      <h3 className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color }}>
+                      <h3 className="text-xs font-semibold uppercase tracking-[0.12em]" style={{ color }}>
                         <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{group.label}</TextPlate>
                       </h3>
-                      <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
+                      <span className="text-xs font-medium tabular-nums text-muted-foreground">
                         {group.items.length}
                       </span>
                     </div>
@@ -49,7 +49,7 @@ export function Skills() {
                       {group.items.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm text-foreground/85 transition-colors hover:border-accent hover:text-accent"
+                          className="rounded-full border border-border bg-card px-3.5 py-1.5 text-sm text-foreground/85 shadow-soft transition-colors duration-200 ease-apple hover:text-primary"
                         >
                           {item}
                         </span>
@@ -62,11 +62,11 @@ export function Skills() {
           </div>
 
           <Reveal delay={120}>
-            <div className="rounded-2xl border border-border bg-background p-6 sm:p-8">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card text-primary">
+            <div className="rounded-3xl border border-border bg-card p-7 shadow-soft sm:p-9">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-primary">
                 <GraduationCap className="h-6 w-6" />
               </span>
-              <h3 className="mt-5 font-serif text-xl font-semibold text-foreground">{education.school}</h3>
+              <h3 className="mt-6 text-xl font-semibold text-foreground sm:text-2xl">{education.school}</h3>
               <p className="mt-1 text-sm text-foreground/80">{education.degree}</p>
               <p className="text-sm text-muted-foreground">{education.place}</p>
 
@@ -74,13 +74,13 @@ export function Skills() {
                 {education.honors.map((h) => (
                   <span
                     key={h}
-                    className="rounded-full bg-accent/15 px-3 py-1 text-xs font-medium text-foreground/90"
+                    className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-foreground/85"
                   >
                     {h}
                   </span>
                 ))}
               </div>
-              <p className="mt-5 font-mono text-xs tracking-wide text-muted-foreground">
+              <p className="mt-6 text-xs font-medium text-muted-foreground">
                 {education.expected}
               </p>
             </div>

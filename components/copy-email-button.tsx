@@ -26,7 +26,7 @@ export function CopyEmailButton({ email, className }: { email: string; className
       onClick={onClick}
       aria-label={`Copy email address ${email}`}
       className={cn(
-        "group inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground transition-colors hover:text-accent",
+        "group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-primary",
         className,
       )}
     >
