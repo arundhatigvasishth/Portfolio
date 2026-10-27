@@ -1,5 +1,6 @@
+import { Fragment } from "react"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, ChevronRight } from "lucide-react"
+import { ArrowUpRight, ChevronRight } from "lucide-react"
 import { projects, proof, thread, type Project, type ThreadStop } from "@/lib/content"
 import { badgeIcons, type BadgeIconKey } from "@/components/icons"
 import { SectionHeading } from "@/components/section-heading"
@@ -9,19 +10,20 @@ import { TrajectoryRail } from "@/components/work/trajectory-rail"
 import { TextPlate } from "@/components/text-plate"
 import { cn } from "@/lib/utils"
 
-const kindStyle = {
+const kindStyle: Partial<Record<ThreadStop["kind"], string>> = {
   Project: "bg-primary/10 text-primary",
-  Research: "bg-[oklch(0.55_0.17_300/0.12)] text-[oklch(0.5_0.17_300)] dark:text-[oklch(0.78_0.13_300)]",
   Role: "bg-[oklch(0.68_0.15_150/0.14)] text-[oklch(0.45_0.13_150)] dark:text-[oklch(0.8_0.14_150)]",
 }
 
 // Work, newest first: the strongest projects lead, and each one points back
-// to the one below it. Featured projects get full cards; the earlier path is
-// smaller cards and one-line notes, so the section stays short.
+// to the one below it. Only stops with a project card are on the rail;
+// research has its own section.
 export function Projects() {
-  const stops = [...thread.stops].reverse()
-  const lastFeatured = stops.findLastIndex((s) => projects.some((p) => p.featured && `/work/${p.slug}` === s.href))
-  let cardCount = 0
+  const stops = [...thread.stops].reverse().flatMap((stop) => {
+    const project = projects.find((p) => `/work/${p.slug}` === stop.href)
+    return project ? [{ stop, project }] : []
+  })
+  const firstEarlier = stops.findIndex(({ project }) => !project.featured)
   return (
     <section id="projects" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
       <SectionHeading index="01" title={thread.title} kicker={thread.kicker} />
@@ -33,30 +35,27 @@ export function Projects() {
       </Reveal>
 
       <TrajectoryRail>
-        {stops.map((stop, i) => {
-          const project = projects.find((p) => `/work/${p.slug}` === stop.href)
-          const small = !project?.featured
+        {stops.map(({ stop, project }, i) => {
+          const small = !project.featured
           return (
-            <li
-              key={stop.title}
-              data-stop
-              className={cn("group/stop relative pl-10 sm:pl-14", project && !small ? "pb-14 sm:pb-16" : "pb-9 sm:pb-11", "last:pb-0")}
-            >
-              {i === lastFeatured + 1 ? (
-                <p className="mb-6 -ml-10 bg-background py-1 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground sm:-ml-14">
+            <Fragment key={stop.title}>
+              {i === firstEarlier ? (
+                <li className="pb-8 pl-10 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground sm:pl-14">
                   <TextPlate>Where it started</TextPlate>
-                </p>
+                </li>
               ) : null}
-              <span
-                data-dot
-                aria-hidden="true"
-                className="absolute left-0 top-1 flex h-6 w-6 scale-90 items-center justify-center rounded-full border-2 border-border bg-background transition-all duration-500 ease-apple group-data-[lit=true]/stop:scale-100 group-data-[lit=true]/stop:border-primary"
-              >
-                <span className="h-2 w-2 rounded-full bg-border transition-colors duration-500 group-data-[lit=true]/stop:bg-primary" />
-              </span>
-              <StopMeta stop={stop} />
-              {project ? <ProjectCard project={project} stop={stop} small={small} flip={cardCount++ % 2 === 1} /> : <Note stop={stop} />}
-            </li>
+              <li data-stop className={cn("group/stop relative pl-10 sm:pl-14", small ? "pb-10 sm:pb-12" : "pb-14 sm:pb-16", "last:pb-0")}>
+                <span
+                  data-dot
+                  aria-hidden="true"
+                  className="absolute left-0 top-1 flex h-6 w-6 scale-90 items-center justify-center rounded-full border-2 border-border bg-background transition-all duration-500 ease-apple group-data-[lit=true]/stop:scale-100 group-data-[lit=true]/stop:border-primary"
+                >
+                  <span className="h-2 w-2 rounded-full bg-border transition-colors duration-500 group-data-[lit=true]/stop:bg-primary" />
+                </span>
+                <StopMeta stop={stop} />
+                <ProjectCard project={project} stop={stop} small={small} flip={i % 2 === 1} />
+              </li>
+            </Fragment>
           )
         })}
       </TrajectoryRail>
@@ -74,9 +73,7 @@ export function Projects() {
                   {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
                   className="group flex h-full flex-col gap-1 p-6 transition-colors hover:bg-secondary/60 sm:p-8"
                 >
-                  <span className="text-3xl font-semibold tabular-nums tracking-tight text-foreground sm:text-4xl">
-                    {item.value}
-                  </span>
+                  <span className="text-3xl font-semibold tabular-nums tracking-tight text-foreground sm:text-4xl">{item.value}</span>
                   <span className="text-pretty text-sm leading-snug text-muted-foreground group-hover:text-foreground/80">
                     {item.label}
                   </span>
@@ -97,23 +94,6 @@ function StopMeta({ stop }: { stop: ThreadStop }) {
         <TextPlate>{stop.period}</TextPlate>
       </span>
       <span className={cn("rounded-full px-2.5 py-0.5 text-[11px] font-medium", kindStyle[stop.kind])}>{stop.kind}</span>
-    </div>
-  )
-}
-
-// A research or role stop: the turn between two projects, kept short.
-function Note({ stop }: { stop: ThreadStop }) {
-  return (
-    <div className="mt-1.5 max-w-2xl opacity-50 transition-opacity duration-700 ease-apple group-data-[lit=true]/stop:opacity-100">
-      <h3 className="text-lg font-semibold text-foreground">
-        <Link href={stop.href} className="group inline-flex items-center gap-2 hover:text-primary">
-          <TextPlate>{stop.title}</TextPlate>
-          <ArrowRight className="h-4 w-4 -translate-x-1 opacity-0 transition-all duration-300 ease-apple group-hover:translate-x-0 group-hover:opacity-100" />
-        </Link>
-      </h3>
-      <p className="mt-1 text-pretty text-[15px] leading-relaxed text-muted-foreground">
-        <TextPlate>{stop.why}</TextPlate>
-      </p>
     </div>
   )
 }

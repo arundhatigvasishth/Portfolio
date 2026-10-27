@@ -48,9 +48,11 @@ export default async function CaseStudyPage({ params }: Props) {
   if (index === -1) notFound()
   const project = projects[index]
   const next = projects[(index + 1) % projects.length]
-  const stopIndex = thread.stops.findIndex((t) => t.href === `/work/${project.slug}`)
-  const stop = thread.stops[stopIndex]
-  const before = stopIndex > 0 ? thread.stops[stopIndex - 1] : null
+  // Only project stops: "Came after" always points to another case study.
+  const projectStops = thread.stops.filter((t) => t.href.startsWith("/work/"))
+  const stopIndex = projectStops.findIndex((t) => t.href === `/work/${project.slug}`)
+  const stop = projectStops[stopIndex]
+  const before = stopIndex > 0 ? projectStops[stopIndex - 1] : null
   const playable = project.slug === "fingersolve" || project.slug === "medecho"
 
   return (
