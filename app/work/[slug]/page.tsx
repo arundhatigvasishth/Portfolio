@@ -149,8 +149,8 @@ export default async function CaseStudyPage({ params }: Props) {
                       Came after {before.title}
                     </Link>
                   ) : null}
-                  <Link href="/#thread" className="ml-5 mt-6 inline-flex text-sm text-muted-foreground hover:text-foreground">
-                    See the whole thread
+                  <Link href="/#projects" className="ml-5 mt-6 inline-flex text-sm text-muted-foreground hover:text-foreground">
+                    See the whole trajectory
                   </Link>
                 </div>
               </Reveal>

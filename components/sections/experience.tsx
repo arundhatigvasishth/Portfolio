@@ -10,7 +10,7 @@ export function Experience() {
   return (
     <section id="experience" className="relative">
       <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
-        <SectionHeading index="05" title="Experience" kicker="Where the work meets real stakes." />
+        <SectionHeading index="03" title="Experience" kicker="Where the work meets real stakes." />
 
         <Accordion defaultValue={experience[0] ? [experience[0].id] : []} className="flex flex-col gap-4">
           {experience.map((job, i) => {

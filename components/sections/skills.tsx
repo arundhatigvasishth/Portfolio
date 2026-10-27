@@ -11,7 +11,7 @@ export function Skills() {
   return (
     <section id="skills" className="relative">
       <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
-        <SectionHeading index="07" title="Skills & Education" />
+        <SectionHeading index="05" title="Skills & Education" />
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
           <div className="flex flex-col gap-9">

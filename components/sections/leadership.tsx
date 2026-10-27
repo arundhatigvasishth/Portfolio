@@ -8,7 +8,7 @@ import { Reveal } from "@/components/reveal"
 export function Leadership() {
   return (
     <section id="leadership" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
-      <SectionHeading index="06" title="Leadership" kicker="Teaching, organizing, and helping other people get started." />
+      <SectionHeading index="04" title="Leadership" kicker="Teaching, organizing, and helping other people get started." />
 
       <div className="grid gap-5 md:grid-cols-2">
         {leadership.map((item, i) => {

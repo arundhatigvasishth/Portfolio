@@ -28,11 +28,6 @@ export const profile = {
   resumeFileName: "Arundhati-Vasishth-Resume.pdf",
 }
 
-export const about: string[] = [
-  "I study computer science at UMass Amherst. Most of what I build sits where a model meets a system around it: retrieval that has to cite its sources, routers that have to stay up when a replica dies, agents that are allowed to move money only inside limits they can't talk their way out of.",
-  "Outside of code, I train in Bharatanatyam and Kathak, two classical Indian dance forms, and dance Western styles for fun. Both worlds run on the same discipline: precise timing, deliberate repetition, and a lot of quiet practice before anything looks effortless.",
-  "The two aren't as separate as they sound. Bharatanatyam and Kathak are built on mudras, codified hand gestures that carry meaning. FingerSolve, one of the projects below, reads hand shape in real time. Different vocabulary, same underlying question: what can a hand's shape communicate, and how precisely can that be read.",
-]
 
 // ---------------------------------------------------------------------------
 // Work: featured case studies, then smaller additional projects.
@@ -410,10 +405,10 @@ export type ThreadStop = {
 }
 
 export const thread = {
-  title: "The thread",
-  kicker: "Gestures, X-rays, markets, and load balancers. It looks scattered from the outside.",
+  title: "Work",
+  kicker: "Gestures, X-rays, markets, load balancers. Looks scattered. It isn't.",
   intro:
-    "From the inside it's one question, asked a little louder each time: what does it take for a model to be trustworthy enough to act on? Here's how each project led to the next.",
+    "I trained in Bharatanatyam and Kathak long before I wrote code. Classical Indian dance runs on mudras, hand shapes with exact meanings, so my first project asked whether a camera could read them. Every project since has asked the same question a little louder: what does it take for a model to be trustworthy enough to act on? Newest first, so each one grew out of the one below it.",
   stops: [
     {
       period: "Spring 2025",
@@ -481,19 +476,19 @@ export const thread = {
     },
     {
       period: "Fall 2026",
-      title: "Tokenwise",
-      kind: "Project",
-      href: "/work/tokenwise",
-      why: "Routing again, with a new question: not which replica, but which model, and whether the grid can afford it right now.",
-      lesson: "Label what's simulated. A demo only convinces people if they can tell what's real.",
-    },
-    {
-      period: "Fall 2026",
       title: "Earnings propagation",
       kind: "Research",
       href: "/#research",
       why: "whyrouted's decision log is a map of where requests travel. Markets have the same shape: when news hits one company, where does it go next?",
       lesson: "Still learning this one. So far: point-in-time data first, because a model that peeks at the future learns nothing.",
+    },
+    {
+      period: "Fall 2026",
+      title: "Tokenwise",
+      kind: "Project",
+      href: "/work/tokenwise",
+      why: "Routing again, with a new question: not which replica, but which model, and whether the grid can afford it right now.",
+      lesson: "Label what's simulated. A demo only convinces people if they can tell what's real.",
     },
   ] satisfies ThreadStop[],
 }
@@ -818,7 +813,6 @@ export const contact = {
 }
 
 export const nav = [
-  { label: "Story", href: "/#thread" },
   { label: "Work", href: "/#projects" },
   { label: "Research", href: "/#research" },
   { label: "Experience", href: "/#experience" },
