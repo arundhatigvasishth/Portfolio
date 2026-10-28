@@ -39,6 +39,16 @@ export type Metric = { value: string; label: string; note?: string }
 export type Challenge = { title: string; body: string }
 export type VisualKey = "tracify" | "whyrouted" | "tokenwise" | "knowyork" | "fingersolve" | "medecho"
 
+export type Feature = { image: string; alt: string; caption: string; href: string; aspect?: "3/2" | "3/4" }
+
+// Shown on both the EOHHS role and the Tracify case study.
+const awsTraining: Feature = {
+  image: "/experience/aws-ai-training.jpg",
+  alt: "AI for the Commonwealth interns and AWS trainers outside the UMass Amherst Computer Science Laboratories building",
+  caption: "AWS AI training for Commonwealth interns",
+  href: "https://www.linkedin.com/posts/umass-amherst-public-interest-technology-initiative_thank-you-to-amazon-web-services-aws-for-activity-7473459493683585025-9U7o",
+}
+
 export type Project = {
   slug: string
   name: string
@@ -50,6 +60,8 @@ export type Project = {
   summary: string
   stack: string[]
   links: WorkLink[]
+  // A photo beside the case-study heading, linking to where it was posted.
+  feature?: Feature
   // Case-study body.
   problem: string[]
   role: { team: string; built: string[]; note?: string }
@@ -77,13 +89,8 @@ export const projects: Project[] = [
     summary:
       "A retrieval-augmented assistant for the state's Metrik inspection platform that answers questions from the official Massachusetts CMR regulations and shows where each answer came from.",
     stack: ["AWS Bedrock", "Lambda", "DynamoDB", "OpenSearch", "Python", "RAG"],
-    links: [
-      {
-        label: "AWS AI training for Commonwealth interns",
-        href: "https://www.linkedin.com/posts/umass-amherst-public-interest-technology-initiative_thank-you-to-amazon-web-services-aws-for-activity-7473459493683585025-9U7o",
-        kind: "post",
-      },
-    ],
+    links: [],
+    feature: awsTraining,
     problem: [
       "Local health inspectors enforce the state sanitary code, and the rules live in long regulatory PDFs. Finding the right section by hand took inspectors 2 to 10 minutes per question, often in the middle of an inspection.",
       "The answers end up in enforcement decisions that can be contested in court. A chatbot that sounds confident but invents a rule is worse than no chatbot, so every answer had to be grounded in the regulation itself and traceable back to it.",
@@ -618,7 +625,7 @@ export type Experience = {
   points: string[]
   pointGroups?: { period: string; points: string[] }[]
   link?: { label: string; href: string }
-  feature?: { image: string; alt: string; caption: string; href: string; aspect?: "3/2" | "3/4" }
+  feature?: Feature
   logo?: { src: string; alt: string }
 }
 
@@ -635,12 +642,7 @@ export const experience: Experience[] = [
       "Designed statewide audit logging, inspector feedback, and response-flagging workflows to track accuracy, completeness, citations, and retrieval quality.",
     ],
     link: { label: "Read the Tracify case study", href: "/work/tracify" },
-    feature: {
-      image: "/experience/aws-ai-training.jpg",
-      alt: "AI for the Commonwealth interns and AWS trainers outside the UMass Amherst Computer Science Laboratories building",
-      caption: "AWS AI training for Commonwealth interns",
-      href: "https://www.linkedin.com/posts/umass-amherst-public-interest-technology-initiative_thank-you-to-amazon-web-services-aws-for-activity-7473459493683585025-9U7o",
-    },
+    feature: awsTraining,
     logo: { src: "/logos/eohhs.jpg", alt: "Massachusetts Executive Office of Health & Human Services seal" },
   },
   {

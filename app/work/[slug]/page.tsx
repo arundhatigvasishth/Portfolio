@@ -68,6 +68,8 @@ export default async function CaseStudyPage({ params }: Props) {
       <SiteNav />
       <main>
         <header className="relative mx-auto max-w-5xl px-4 pt-32 pb-16 sm:px-8 sm:pt-40 sm:pb-20">
+          <div className={project.feature ? "grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-14" : undefined}>
+          <div>
           <Link
             href="/#projects"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -120,6 +122,31 @@ export default async function CaseStudyPage({ params }: Props) {
               {links.find((l) => l.note)?.note}
             </p>
           ) : null}
+          </div>
+
+          {project.feature ? (
+            <a href={project.feature.href} target="_blank" rel="noreferrer noopener" className="group/feature block w-full max-w-sm lg:max-w-none">
+              <div
+                className={`relative w-full overflow-hidden rounded-2xl border border-border shadow-soft ${
+                  project.feature.aspect === "3/4" ? "aspect-[3/4]" : "aspect-[3/2]"
+                }`}
+              >
+                <Image
+                  src={project.feature.image}
+                  alt={project.feature.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 17rem, 24rem"
+                  className="object-cover transition-transform duration-700 ease-apple group-hover/feature:scale-[1.03]"
+                />
+              </div>
+              <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground transition-colors group-hover/feature:text-primary">
+                {project.feature.caption}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </p>
+            </a>
+          ) : null}
+          </div>
         </header>
 
         {/* Solid from here down, so long-form reading sits on a calm surface. */}
