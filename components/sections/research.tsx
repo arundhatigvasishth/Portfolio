@@ -4,6 +4,7 @@ import { badgeIcons, type BadgeIconKey } from "@/components/icons"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
 import { TextPlate } from "@/components/text-plate"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { cn } from "@/lib/utils"
 
 const stageStyle: Record<ResearchItem["stage"], string> = {
@@ -14,7 +15,7 @@ const stageStyle: Record<ResearchItem["stage"], string> = {
 
 export function Research() {
   return (
-    <section id="research" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
+    <section id="research" className="relative mx-auto max-w-6xl px-4 py-20 sm:px-8 sm:py-28">
       <SectionHeading index="02" title="Quantitative research" kicker={research.org} />
 
       <Reveal>
@@ -23,80 +24,118 @@ export function Research() {
         </p>
       </Reveal>
 
-      <div className="mt-12 flex flex-col gap-6">
-        {research.items.map((item) => {
+      <Accordion multiple className="mt-10 flex flex-col gap-3">
+        {research.items.map((item, i) => {
           const Icon = badgeIcons[item.id as BadgeIconKey]
           return (
-            <Reveal key={item.id}>
-              <article className="rounded-3xl border border-border bg-card p-7 shadow-soft sm:p-10">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-primary">
-                    {Icon ? <Icon className="h-5 w-5" /> : null}
-                  </span>
-                  <span className={cn("rounded-full px-3 py-1 text-xs font-medium", stageStyle[item.stage])}>
-                    {item.stage}
-                  </span>
-                  <span className="text-xs text-muted-foreground">{item.period}</span>
-                </div>
+            <Reveal key={item.id} delay={i * 80}>
+              <AccordionItem
+                value={item.id}
+                className="group/item overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-shadow duration-300 ease-apple hover:shadow-lift"
+              >
+                <AccordionTrigger className="items-center gap-4 rounded-none px-5 py-5 hover:no-underline sm:px-7">
+                  <div className="flex min-w-0 flex-1 items-center gap-4 text-left">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary transition-colors duration-300 group-hover/item:bg-primary group-hover/item:text-primary-foreground">
+                      {Icon ? <Icon className="h-5 w-5" /> : null}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span className={cn("rounded-full px-2.5 py-0.5 text-[11px] font-medium", stageStyle[item.stage])}>
+                          {item.stage}
+                        </span>
+                        <span className="text-xs font-normal text-muted-foreground">{item.period}</span>
+                      </div>
+                      <h3 className="mt-1 text-lg font-semibold text-foreground sm:text-xl">{item.title}</h3>
+                    </div>
+                  </div>
+                  <MiniTrack steps={item.track} />
+                </AccordionTrigger>
 
-                <h3 className="mt-5 text-2xl font-semibold text-foreground sm:text-3xl">{item.title}</h3>
+                <AccordionContent className="px-5 pb-0 sm:px-7 [&_a]:no-underline">
+                  <div className="border-t border-border py-6">
+                    <div className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
+                      <div>
+                        <p className="text-pretty text-[17px] leading-relaxed text-foreground/85">{item.question}</p>
+                        <ul className="mt-5 flex flex-col gap-3">
+                          {item.approach.map((step) => (
+                            <li key={step} className="flex gap-3 text-[15px] leading-relaxed text-muted-foreground">
+                              <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                              <span className="text-pretty">{step}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                <div className="mt-6 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
-                  <div>
-                    <p className="text-pretty text-[17px] leading-relaxed text-foreground/85">{item.question}</p>
-                    <ul className="mt-5 flex flex-col gap-3">
-                      {item.approach.map((step) => (
-                        <li key={step} className="flex gap-3 text-[15px] leading-relaxed text-muted-foreground">
-                          <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                          <span className="text-pretty">{step}</span>
-                        </li>
+                      <div className="flex flex-col gap-6">
+                        <Track steps={item.track} />
+                        <p className="text-sm leading-relaxed text-foreground/80">
+                          <span className="font-medium text-foreground">Status: </span>
+                          {item.status}
+                        </p>
+                        {item.id === "arbitrage" ? <Relations /> : null}
+                        {item.id === "edgar" ? <Spillover /> : null}
+                      </div>
+                    </div>
+
+                    <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border pt-6">
+                      <div className="flex flex-wrap gap-2">
+                        {item.stack.map((t) => (
+                          <span key={t} className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      {item.links?.map((link) => (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                        >
+                          {link.label}
+                          <ArrowUpRight className="h-4 w-4" />
+                        </a>
                       ))}
-                    </ul>
+                      {item.teamNote ? <p className="w-full text-xs text-muted-foreground">{item.teamNote}</p> : null}
+                    </div>
                   </div>
-
-                  <div className="flex flex-col gap-6">
-                    <Track steps={item.track} />
-                    <p className="text-sm leading-relaxed text-foreground/80">
-                      <span className="font-medium text-foreground">Status: </span>
-                      {item.status}
-                    </p>
-                    {item.id === "arbitrage" ? <Relations /> : null}
-                    {item.id === "edgar" ? <Spillover /> : null}
-                  </div>
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border pt-6">
-                  <div className="flex flex-wrap gap-2">
-                    {item.stack.map((t) => (
-                      <span key={t} className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  {item.links?.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="h-4 w-4" />
-                    </a>
-                  ))}
-                  {item.teamNote ? <p className="w-full text-xs text-muted-foreground">{item.teamNote}</p> : null}
-                </div>
-              </article>
+                </AccordionContent>
+              </AccordionItem>
             </Reveal>
           )
         })}
-      </div>
+      </Accordion>
     </section>
   )
 }
 
 const stateLabel = { done: "Done", active: "In progress", open: "Not started" }
+
+// The progress track at a glance, shown on the closed row.
+function MiniTrack({ steps }: { steps: ResearchItem["track"] }) {
+  const done = steps.filter((s) => s.state === "done").length
+  return (
+    <span className="hidden shrink-0 items-center gap-3 sm:flex" aria-hidden="true">
+      <span className="flex items-center gap-1">
+        {steps.map((step) => (
+          <span
+            key={step.label}
+            className={cn(
+              "h-1.5 w-5 rounded-full",
+              step.state === "done" && "bg-primary",
+              step.state === "active" && "animate-pulse bg-primary/50 motion-reduce:animate-none",
+              step.state === "open" && "bg-border",
+            )}
+          />
+        ))}
+      </span>
+      <span className="text-xs font-normal tabular-nums text-muted-foreground">
+        {done}/{steps.length}
+      </span>
+    </span>
+  )
+}
 
 function Track({ steps }: { steps: ResearchItem["track"] }) {
   return (

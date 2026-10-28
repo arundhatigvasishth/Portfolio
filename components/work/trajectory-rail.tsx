@@ -35,7 +35,11 @@ export function TrajectoryRail({ children }: { children: ReactNode }) {
     update()
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onScroll)
+    // Rows open and close, which moves every dot below them.
+    const ro = new ResizeObserver(onScroll)
+    ro.observe(el)
     return () => {
+      ro.disconnect()
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onScroll)
       cancelAnimationFrame(raf)

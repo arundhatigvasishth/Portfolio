@@ -7,15 +7,15 @@ import { Reveal } from "@/components/reveal"
 
 export function Leadership() {
   return (
-    <section id="leadership" className="relative mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
+    <section id="leadership" className="relative mx-auto max-w-6xl px-4 py-20 sm:px-8 sm:py-28">
       <SectionHeading index="04" title="Leadership" kicker="Teaching, organizing, and helping other people get started." />
 
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         {leadership.map((item, i) => {
           const Icon = badgeIcons[item.id as BadgeIconKey]
           return (
             <Reveal key={item.id} delay={(i % 2) * 90}>
-              <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-7 shadow-soft sm:p-8">
+              <article className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-7">
                 <div className="flex items-start justify-between gap-4">
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-secondary p-1.5 text-primary">
                     {item.logo ? (

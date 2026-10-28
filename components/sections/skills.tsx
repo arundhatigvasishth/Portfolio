@@ -10,7 +10,7 @@ const categoryColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"]
 export function Skills() {
   return (
     <section id="skills" className="relative">
-      <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-8 sm:py-28">
         <SectionHeading index="05" title="Skills & Education" />
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">

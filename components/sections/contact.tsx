@@ -11,7 +11,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative">
-      <div className="mx-auto max-w-6xl px-4 py-32 sm:px-8 sm:py-48">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-8 sm:py-32">
         <Reveal className="flex flex-col items-center text-center">
           <BeatStrip className="mb-10 opacity-70" />
           <h2 className="text-balance text-5xl font-semibold leading-[1.02] text-foreground sm:text-7xl md:text-8xl">

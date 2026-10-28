@@ -294,3 +294,8 @@
     scroll-behavior: auto;
   }
 }
+
+/* Work rail: the live peek fades out at its bottom edge. */
+.peek-mask {
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}

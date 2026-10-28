@@ -9,10 +9,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 export function Experience() {
   return (
     <section id="experience" className="relative">
-      <div className="mx-auto max-w-6xl px-4 py-28 sm:px-8 sm:py-40">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-8 sm:py-28">
         <SectionHeading index="03" title="Experience" kicker="Where the work meets real stakes." />
 
-        <Accordion defaultValue={experience[0] ? [experience[0].id] : []} className="flex flex-col gap-4">
+        <Accordion multiple className="flex flex-col gap-3">
           {experience.map((job, i) => {
             const Icon = badgeIcons[job.id as BadgeIconKey]
             return (
