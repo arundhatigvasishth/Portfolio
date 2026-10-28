@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { nav, profile } from "@/lib/content"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { CommandPaletteTrigger } from "@/components/site-command"
 
 const iconButton =
@@ -25,7 +24,7 @@ export function SiteNav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ease-apple ${
-        frosted ? "glass border-border" : "border-transparent"
+        frosted ? "glass border-border" : "border-white/[0.06] bg-background/40 backdrop-blur-md"
       }`}
     >
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-8">
@@ -39,7 +38,7 @@ export function SiteNav() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="rounded-full px-3 py-1.5 text-foreground/70 transition-colors duration-200 ease-apple hover:text-foreground"
+                  className="rounded-full px-3 py-1.5 text-foreground/80 transition-colors duration-200 ease-apple hover:text-foreground"
                 >
                   {item.label}
                 </a>
@@ -48,7 +47,6 @@ export function SiteNav() {
           </ul>
           <div className="flex items-center gap-1">
             <CommandPaletteTrigger className={iconButton} />
-            <ThemeToggle />
             <a
               href={profile.resume}
               target="_blank"
@@ -62,7 +60,6 @@ export function SiteNav() {
 
         <div className="flex items-center gap-1 lg:hidden">
           <CommandPaletteTrigger className={iconButton} />
-          <ThemeToggle />
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}

@@ -3,7 +3,6 @@ import { arbRelations, research, type Research as ResearchItem } from "@/lib/con
 import { badgeIcons, type BadgeIconKey } from "@/components/icons"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
-import { TextPlate } from "@/components/text-plate"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { cn } from "@/lib/utils"
 
@@ -20,7 +19,7 @@ export function Research() {
 
       <Reveal>
         <p className="max-w-2xl text-pretty text-lg leading-relaxed text-foreground/85">
-          <TextPlate>{research.intro}</TextPlate>
+          {research.intro}
         </p>
       </Reveal>
 

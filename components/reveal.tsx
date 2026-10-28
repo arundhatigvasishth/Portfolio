@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, type ReactNode } from "react"
-import { rhythmEasing } from "@/lib/rhythm"
+import { revealEasing } from "@/lib/motion"
 
 type RevealProps = {
   children: ReactNode
@@ -10,8 +10,8 @@ type RevealProps = {
   as?: "div" | "li" | "section"
 }
 
-// Reveals content on scroll using one shared rhythmic easing curve, so every
-// entrance across the site moves on the same beat. Respects reduced motion.
+// Reveals content on scroll using one shared easing curve, so every entrance
+// across the site moves the same way. Respects reduced motion.
 export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null)
   const [visible, setVisible] = useState(false)
@@ -49,7 +49,7 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
       style={{
         opacity: animate ? (visible ? 1 : 0) : 1,
         transform: animate ? (visible ? "none" : "translateY(16px)") : "none",
-        transition: animate ? `opacity 0.9s ${rhythmEasing} ${delay}ms, transform 0.9s ${rhythmEasing} ${delay}ms` : undefined,
+        transition: animate ? `opacity 0.9s ${revealEasing} ${delay}ms, transform 0.9s ${revealEasing} ${delay}ms` : undefined,
         willChange: animate ? "opacity, transform" : undefined,
       }}
     >

@@ -7,7 +7,6 @@ import { projects, site, thread, type WorkLink } from "@/lib/content"
 import { SiteNav } from "@/components/site-nav"
 import { Contact } from "@/components/sections/contact"
 import { Reveal } from "@/components/reveal"
-import { TextPlate } from "@/components/text-plate"
 import { ProjectVisual } from "@/components/work/project-visual"
 import { VideoEmbed } from "@/components/work/video-embed"
 
@@ -65,17 +64,17 @@ export default async function CaseStudyPage({ params }: Props) {
             className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            <TextPlate>All work</TextPlate>
+            All work
           </Link>
 
           <p className="mt-10 text-sm font-medium text-muted-foreground">
-            <TextPlate>{project.context}</TextPlate>
+            {project.context}
           </p>
           <h1 className="mt-3 text-balance text-[clamp(2.75rem,8vw,5.5rem)] font-semibold leading-[1.02] text-foreground">
-            <TextPlate className="px-2 -mx-2">{project.name}</TextPlate>
+            {project.name}
           </h1>
           <p className="mt-6 max-w-3xl text-pretty text-xl leading-snug text-foreground/85 sm:text-2xl">
-            <TextPlate>{project.tagline}</TextPlate>
+            {project.tagline}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-2">
@@ -108,7 +107,7 @@ export default async function CaseStudyPage({ params }: Props) {
           ) : null}
           {project.links.some((l) => l.note) ? (
             <p className="mt-3 text-xs text-muted-foreground">
-              <TextPlate>{project.links.find((l) => l.note)?.note}</TextPlate>
+              {project.links.find((l) => l.note)?.note}
             </p>
           ) : null}
         </header>

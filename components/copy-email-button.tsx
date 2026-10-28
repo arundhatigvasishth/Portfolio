@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Check, Copy } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
-import { TextPlate } from "@/components/text-plate"
 
 export function CopyEmailButton({ email, className }: { email: string; className?: string }) {
   const [copied, setCopied] = useState(false)
@@ -30,7 +29,7 @@ export function CopyEmailButton({ email, className }: { email: string; className
         className,
       )}
     >
-      <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{email}</TextPlate>
+      {email}
       {copied ? (
         <Check className="h-3.5 w-3.5 text-accent" />
       ) : (

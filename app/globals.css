@@ -267,29 +267,7 @@
   }
 }
 
-@keyframes beat {
-  0%,
-  100% {
-    transform: scaleY(0.3);
-    opacity: 0.22;
-    background-color: var(--muted-foreground);
-  }
-  6% {
-    transform: scaleY(1);
-    opacity: 1;
-    background-color: var(--accent);
-  }
-  22% {
-    transform: scaleY(0.3);
-    opacity: 0.22;
-    background-color: var(--muted-foreground);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .beat-bar {
-    animation: none !important;
-  }
   html {
     scroll-behavior: auto;
   }

@@ -2,12 +2,11 @@ import { Fragment } from "react"
 import Link from "next/link"
 import { ArrowUpRight, ChevronRight } from "lucide-react"
 import { projects, proof, thread, type Project, type ThreadStop } from "@/lib/content"
-import { badgeIcons, type BadgeIconKey } from "@/components/icons"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
 import { ProjectVisual } from "@/components/work/project-visual"
 import { TrajectoryRail } from "@/components/work/trajectory-rail"
-import { TextPlate } from "@/components/text-plate"
+import { PlanetBadge } from "@/components/planet-badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 // Work, newest first: the strongest projects lead, and each one points back
@@ -26,7 +25,7 @@ export function Projects() {
 
       <Reveal>
         <p className="max-w-3xl text-pretty text-lg leading-relaxed text-foreground/85">
-          <TextPlate>{thread.intro}</TextPlate>
+          {thread.intro}
         </p>
       </Reveal>
 
@@ -60,10 +59,10 @@ export function Projects() {
             <Fragment key={stop.title}>
               {i === firstEarlier ? (
                 <li className="pb-3 pl-10 pt-5 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground sm:pl-14">
-                  <TextPlate>Where it started</TextPlate>
+                  Where it started
                 </li>
               ) : null}
-              <li data-stop className="group/stop relative pb-3 pl-10 last:pb-0 sm:pl-14">
+              <li id={`project-${project.slug}`} data-stop className="group/stop relative scroll-mt-24 pb-3 pl-10 last:pb-0 sm:pl-14">
                 <span
                   data-dot
                   aria-hidden="true"
@@ -84,7 +83,6 @@ export function Projects() {
 }
 
 function ProjectRow({ project, stop }: { project: Project; stop: ThreadStop }) {
-  const Icon = badgeIcons[project.slug as BadgeIconKey]
   const extras = project.links.filter((l) => l.kind === "repo" || l.kind === "demo" || l.kind === "video").slice(0, 2)
   return (
     <AccordionItem
@@ -93,9 +91,7 @@ function ProjectRow({ project, stop }: { project: Project; stop: ThreadStop }) {
     >
       <AccordionTrigger className="items-center gap-4 rounded-none px-4 py-4 hover:no-underline sm:px-6 sm:py-5 md:pr-[17rem] md:[&>svg]:absolute md:[&>svg]:right-6 md:[&>svg]:top-1/2 md:[&>svg]:-translate-y-1/2">
         <div className="flex min-w-0 flex-1 items-center gap-4 text-left">
-          <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl sm:flex bg-secondary text-primary transition-colors duration-300 group-hover/item:bg-primary group-hover/item:text-primary-foreground">
-            {Icon ? <Icon className="h-5 w-5" /> : null}
-          </span>
+          <PlanetBadge slug={project.slug} className="hidden transition-transform duration-500 ease-apple group-hover/item:rotate-12 group-hover/item:scale-110 sm:flex" />
           <div className="min-w-0">
             <p className="text-xs font-normal tabular-nums text-muted-foreground">
               {stop.period} · {project.context}

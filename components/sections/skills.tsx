@@ -2,7 +2,6 @@ import { GraduationCap } from "lucide-react"
 import { skills, education } from "@/lib/content"
 import { SectionHeading } from "@/components/section-heading"
 import { Reveal } from "@/components/reveal"
-import { TextPlate } from "@/components/text-plate"
 
 // Fixed categorical order, one hue per group — matches lib/content.ts order.
 const categoryColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"]
@@ -22,28 +21,15 @@ export function Skills() {
                   <div>
                     <div className="mb-3 flex items-baseline justify-between gap-4">
                       <h3 className="text-xs font-semibold uppercase tracking-[0.12em]" style={{ color }}>
-                        <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">{group.label}</TextPlate>
+                        {group.label}
                       </h3>
                       <span className="text-xs font-medium tabular-nums text-muted-foreground">
                         {group.items.length}
                       </span>
                     </div>
 
-                    {/* A rhythmic bar per skill — the count read as a beat, not a
-                        separate chart competing with the list below it. */}
-                    <div className="mb-4 flex h-4 items-end gap-[3px]" aria-hidden="true">
-                      {group.items.map((_, b) => (
-                        <span
-                          key={b}
-                          className="w-[3px] rounded-full"
-                          style={{
-                            backgroundColor: color,
-                            height: `${45 + ((b * 37) % 55)}%`,
-                            opacity: 0.4 + ((b * 17) % 60) / 100,
-                          }}
-                        />
-                      ))}
-                    </div>
+                    {/* One star per skill, joined into a small constellation. */}
+                    <Constellation count={group.items.length} color={color} />
 
                     <div className="flex flex-wrap gap-2.5">
                       {group.items.map((item) => (
@@ -88,5 +74,17 @@ export function Skills() {
         </div>
       </div>
     </section>
+  )
+}
+
+function Constellation({ count, color }: { count: number; color: string }) {
+  const stars = Array.from({ length: count }, (_, i) => ({ x: 6 + i * 14, y: 5 + ((i * 37) % 13), r: 1.2 + ((i * 17) % 3) * 0.5 }))
+  return (
+    <svg className="mb-4 h-5" width={stars.length * 14} viewBox={`0 0 ${stars.length * 14} 20`} aria-hidden="true">
+      <polyline points={stars.map((s) => `${s.x},${s.y}`).join(" ")} fill="none" stroke={color} strokeOpacity={0.35} strokeWidth={0.75} />
+      {stars.map((s, i) => (
+        <circle key={i} cx={s.x} cy={s.y} r={s.r} fill={color} />
+      ))}
+    </svg>
   )
 }

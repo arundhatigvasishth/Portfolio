@@ -1,71 +1,25 @@
-import { ChevronRight, FileText } from "lucide-react"
-import { profile } from "@/lib/content"
-import { IconGithub, IconLinkedin } from "@/components/icons"
-import { TextPlate } from "@/components/text-plate"
+import { ChevronDown } from "lucide-react"
+import { HeroVisual } from "@/components/site-background"
 
+// The first screen is only the sky. I'm the star at the center (click it for
+// the intro and links); every planet is a project.
 export function Hero() {
   return (
-    <section id="top" className="relative min-h-[100svh] w-full overflow-hidden">
-      {/* readability wash: solid behind the type, fading out so the field shows on the right */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/0 md:via-background/50" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-
-      <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-4 pt-24 pb-16 sm:px-8">
-        <div className="max-w-3xl">
-          <p className="mb-6 text-sm font-medium text-muted-foreground">
-            <TextPlate>{profile.school}</TextPlate>
-          </p>
-          <h1 className="text-balance text-[clamp(3rem,9vw,6.5rem)] font-semibold leading-[1.02] text-foreground">
-            <TextPlate className="block px-2 py-0.5 -mx-2">Arundhati</TextPlate>
-            <TextPlate className="block px-2 py-0.5 -mx-2 text-muted-foreground">Vasishth</TextPlate>
-          </h1>
-          <p className="mt-7 max-w-2xl text-pretty text-2xl font-medium leading-snug text-foreground sm:text-[1.75rem]">
-            <TextPlate>{profile.tagline}</TextPlate>
-          </p>
-          <p className="mt-4 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            <TextPlate>{profile.intro}</TextPlate>
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-1 rounded-full bg-primary px-6 py-3 text-[15px] font-medium text-primary-foreground shadow-soft transition-[transform,opacity] duration-300 ease-apple hover:opacity-90 active:scale-[0.98]"
-            >
-              View projects
-            </a>
-            <a
-              href={profile.resume}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="group inline-flex items-center gap-1.5 rounded-full px-3 py-3 text-[15px] font-medium text-primary transition-colors"
-            >
-              <FileText className="h-4 w-4" />
-              <TextPlate className="px-1 py-0.5 -mx-1 -my-0.5">Resume</TextPlate>
-              <ChevronRight className="h-4 w-4 transition-transform duration-300 ease-apple group-hover:translate-x-0.5" />
-            </a>
-            <div className="flex items-center gap-1">
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="GitHub profile"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-foreground/60 transition-colors duration-200 ease-apple hover:bg-foreground/[0.06] hover:text-foreground"
-              >
-                <IconGithub className="h-5 w-5" />
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="LinkedIn profile"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-foreground/60 transition-colors duration-200 ease-apple hover:bg-foreground/[0.06] hover:text-foreground"
-              >
-                <IconLinkedin className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-        </div>
+    <section id="top" aria-label="Arundhati Vasishth: projects as a solar system" className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
+      <h1 className="sr-only">Arundhati Vasishth, software engineer and CS student at UMass Amherst</h1>
+      <div className="absolute inset-0">
+        <HeroVisual />
       </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background" />
+
+      <a
+        href="#projects"
+        className="absolute inset-x-0 bottom-6 mx-auto flex w-fit flex-col items-center gap-1 rounded-full px-4 py-1 text-xs text-white/55 transition-colors hover:text-white sm:bottom-8"
+      >
+        <span className="hidden sm:block">Every planet is a project · hover to read, click to open</span>
+        <span className="sm:hidden">Every planet is a project · tap one</span>
+        <ChevronDown className="h-4 w-4 animate-bounce motion-reduce:animate-none" aria-hidden="true" />
+      </a>
     </section>
   )
 }
