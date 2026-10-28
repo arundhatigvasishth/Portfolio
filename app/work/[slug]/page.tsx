@@ -3,7 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowUpRight, ChevronRight } from "lucide-react"
-import { projects, site, thread, type WorkLink } from "@/lib/content"
+import { profile, projects, site, thread, type WorkLink } from "@/lib/content"
+import { IconGithub } from "@/components/icons"
 import { SiteNav } from "@/components/site-nav"
 import { Contact } from "@/components/sections/contact"
 import { Reveal } from "@/components/reveal"
@@ -53,6 +54,14 @@ export default async function CaseStudyPage({ params }: Props) {
   const stop = projectStops[stopIndex]
   const before = stopIndex > 0 ? projectStops[stopIndex - 1] : null
   const playable = project.slug === "fingersolve" || project.slug === "medecho"
+  // GitHub always leads. Without a public repo, point to my profile and say why.
+  const repo = project.links.find((l) => l.kind === "repo")
+  const links: (WorkLink & { github?: boolean })[] = [
+    repo
+      ? { ...repo, label: "View on GitHub", github: true }
+      : { label: "My GitHub", href: profile.github, kind: "repo", github: true, note: "This project's code isn't public, so this links to my profile." },
+    ...project.links.filter((l) => l !== repo),
+  ]
 
   return (
     <>
@@ -84,9 +93,9 @@ export default async function CaseStudyPage({ params }: Props) {
             ) : null}
           </div>
 
-          {project.links.length ? (
+          {links.length ? (
             <div className="mt-8 flex flex-wrap gap-3">
-              {project.links.map((link, i) => (
+              {links.map((link, i) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -99,15 +108,16 @@ export default async function CaseStudyPage({ params }: Props) {
                   }
                   title={link.note}
                 >
+                  {link.github ? <IconGithub className="mr-1 h-4 w-4" /> : null}
                   {link.label === "Repository" ? linkVerb[link.kind] : link.label}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               ))}
             </div>
           ) : null}
-          {project.links.some((l) => l.note) ? (
+          {links.some((l) => l.note) ? (
             <p className="mt-3 text-xs text-muted-foreground">
-              {project.links.find((l) => l.note)?.note}
+              {links.find((l) => l.note)?.note}
             </p>
           ) : null}
         </header>
